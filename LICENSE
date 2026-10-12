@@ -1,0 +1,23 @@
+Speckvue Proprietary Source Code Notice
+
+Copyright (c) 2026 Speckvue. All rights reserved.
+
+Speckvue Finance is a public-facing commercial product. Its source code is
+proprietary and maintained in a private repository; it is not offered under
+an open-source license.
+
+Except as permitted by applicable law or express written agreement with
+Speckvue, no source-code license is granted to reproduce, modify,
+distribute, sublicense, publish, or independently deploy Speckvue's
+first-party software. Authorized contributors may develop, build and
+operate the product on behalf of Speckvue under their applicable agreements.
+
+Customers' access to the hosted Speckvue Finance product is governed by
+applicable customer/service terms. This repository notice does not define
+or replace those terms and does not prohibit authorized customer use.
+
+Third-party components and materials remain governed by their respective
+licenses. Vendored AlignUI Base Components retain their MIT license,
+original attribution and permission notices in THIRD_PARTY_NOTICES.md.
+This notice does not revoke or restrict rights granted by third-party
+licenses. Additional runtime notices are in THIRD_PARTY_LICENSES.txt.

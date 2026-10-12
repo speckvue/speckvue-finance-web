@@ -1,0 +1,14 @@
+node_modules
+.next
+.tools
+package-lock.json
+coverage
+playwright-report
+test-results
+next-env.d.ts
+dist
+.turbo
+.cache
+CHANGELOG.md
+LICENSE
+THIRD_PARTY_LICENSES.txt

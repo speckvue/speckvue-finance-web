@@ -1,0 +1,41 @@
+name: Verify Docker image
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: cp .env.example .env
+      - run: npm ci
+        env:
+          HUSKY: '0'
+      - run: npm run docker:config
+      - run: npm run docker:build
+      - run: npm run docker:smoke
+      - name: Verify hardened production Compose
+        run: |
+          docker compose --env-file .env -f docker-compose.prod.yml up -d --wait --no-build
+          docker compose --env-file .env -f docker-compose.prod.yml exec -T web node scripts/healthcheck.ts
+      - name: Stop production verification service
+        if: always()
+        run: docker compose --env-file .env -f docker-compose.prod.yml down
+      - name: Verify development Compose
+        run: |
+          docker compose --env-file .env up -d --build --wait
+          docker compose --env-file .env exec -T web node scripts/healthcheck.ts
+          node --env-file=.env --input-type=module <<'JS'
+          const response = await fetch(`http://${process.env.DOCKER_BIND_HOST}:${process.env.APP_PORT}/dashboard`, { signal: AbortSignal.timeout(60000) });
+          if (!response.ok || !(await response.text()).includes('Financial overview')) throw new Error('Development dashboard failed.');
+          JS
+      - name: Stop development verification service
+        if: always()
+        run: docker compose --env-file .env down

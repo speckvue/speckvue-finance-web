@@ -1,0 +1,9 @@
+# ESLint flat config does not read this file; kept for downstream legacy tools.
+# The executable exclusions are maintained in eslint.config.mjs globalIgnores.
+node_modules/
+.next/
+.tools/
+coverage/
+dist/
+test-results/
+playwright-report/

@@ -1,0 +1,229 @@
+[
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/button",
+    "files": ["src/components/ui/button.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/button-group",
+    "files": ["src/components/ui/button-group.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/compact-button",
+    "files": ["src/components/ui/compact-button.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/fancy-button",
+    "files": ["src/components/ui/fancy-button.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/link-button",
+    "files": ["src/components/ui/link-button.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/avatar",
+    "files": [
+      "src/components/ui/avatar.tsx",
+      "src/components/ui/avatar-empty-icons.tsx"
+    ]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/avatar-group",
+    "files": ["src/components/ui/avatar-group.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/avatar-group-compact",
+    "files": ["src/components/ui/avatar-group-compact.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/badge",
+    "files": ["src/components/ui/badge.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/banner",
+    "files": ["src/components/ui/banner.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/data-table",
+    "files": ["src/components/ui/table.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/divider",
+    "files": ["src/components/ui/divider.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/kbd",
+    "files": ["src/components/ui/kbd.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/progress-bar",
+    "files": ["src/components/ui/progress-bar.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/progress-circle",
+    "files": ["src/components/ui/progress-circle.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/rating",
+    "files": ["src/components/ui/rating.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/status-badge",
+    "files": ["src/components/ui/status-badge.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/tag",
+    "files": ["src/components/ui/tag.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/alert",
+    "files": ["src/components/ui/alert.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/notification",
+    "files": ["src/components/ui/notification.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/toast",
+    "files": [
+      "src/components/ui/toast.tsx",
+      "src/components/ui/toast-alert.tsx"
+    ]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/tooltip",
+    "files": ["src/components/ui/tooltip.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/checkbox",
+    "files": ["src/components/ui/checkbox.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/color-picker",
+    "files": ["src/components/ui/color-picker.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/datepicker",
+    "files": ["src/components/ui/datepicker.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/digit-input",
+    "files": ["src/components/ui/digit-input.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/file-upload",
+    "files": [
+      "src/components/ui/file-upload.tsx",
+      "src/components/ui/file-format-icon.tsx"
+    ]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/hint",
+    "files": ["src/components/ui/hint.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/input",
+    "files": ["src/components/ui/input.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/label",
+    "files": ["src/components/ui/label.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/radio",
+    "files": ["src/components/ui/radio.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/select",
+    "files": ["src/components/ui/select.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/slider",
+    "files": ["src/components/ui/slider.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/switch",
+    "files": ["src/components/ui/switch.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/textarea",
+    "files": ["src/components/ui/textarea.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/accordion",
+    "files": ["src/components/ui/accordion.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/breadcrumb",
+    "files": ["src/components/ui/breadcrumb.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/segmented-control",
+    "files": [
+      "src/hooks/use-tab-observer.tsx",
+      "src/components/ui/segmented-control.tsx"
+    ]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/tab-menu-horizontal",
+    "files": [
+      "src/hooks/use-tab-observer.tsx",
+      "src/components/ui/tab-menu-horizontal.tsx"
+    ]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/tab-menu-vertical",
+    "files": ["src/components/ui/tab-menu-vertical.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/dot-stepper",
+    "files": ["src/components/ui/dot-stepper.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/horizontal-stepper",
+    "files": ["src/components/ui/horizontal-stepper.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/pagination",
+    "files": ["src/components/ui/pagination.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/vertical-stepper",
+    "files": ["src/components/ui/vertical-stepper.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/command-menu",
+    "files": ["src/components/ui/command-menu.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/drawer",
+    "files": ["src/components/ui/drawer.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/dropdown",
+    "files": ["src/components/ui/dropdown.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/modal",
+    "files": ["src/components/ui/modal.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/ui/popover",
+    "files": ["src/components/ui/popover.tsx"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/utils/cn",
+    "files": ["src/utils/cn.ts"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/utils/polymorphic",
+    "files": ["src/utils/polymorphic.ts"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/utils/recursive-clone-children",
+    "files": ["src/utils/recursive-clone-children.ts"]
+  },
+  {
+    "url": "https://alignui.com/docs/v1.2/utils/tv",
+    "files": ["src/utils/tv.ts"]
+  }
+]
