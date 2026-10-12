@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/speckvue/speckvue-finance-web/compare/v0.1.0...v0.2.0) (2026-10-12)
+
+
+### Features
+
+* add Docker Watch and refine themes and typography ([cce4ff5](https://github.com/speckvue/speckvue-finance-web/commit/cce4ff589f389bb3a6e81a0f32b13f5281534268))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

@@ -1,6 +1,6 @@
 {
   "name": "speckvue-finance-web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Web application for Speckvue Finance, providing an intuitive interface to manage personal finances, track expenses, monitor income, and organize budgets.",
   "homepage": "https://github.com/speckvue/speckvue-finance-web#readme",
