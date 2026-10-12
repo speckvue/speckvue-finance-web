@@ -15,6 +15,8 @@
 
 import * as Button from '@/components/ui/button';
 
+import '@/styles/fonts.css';
+
 import '@/styles/globals.css';
 
 // ---------------------------------------------------------------------------

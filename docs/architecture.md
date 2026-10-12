@@ -13,7 +13,7 @@ Speckvue Finance is a Next.js App Router frontend foundation for a separate Nest
 - `lib` owns configuration, fetch, queries, auth integration points, validations, and exact monetary utilities.
 - `stores/shell-store.ts` owns ephemeral shared navigation state. No financial data or credentials are persisted.
 
-Server Components are the default. Forms, tables, providers, and interactive shell controls use client boundaries. Root providers contain one per-browser QueryClient and next-themes. The dashboard summaries are server-rendered; the sample transactions demonstrate a query with cancellation and runtime validation.
+Server Components are the default. Forms, tables, providers, and interactive shell controls use client boundaries. Root providers contain one per-browser QueryClient and next-themes. The appearance menu offers explicit Light, Dark, and System choices; only the next-themes-managed HTML class selects dark tokens. Development origins derive from the application URL and binding hosts in .env. The dashboard summaries are server-rendered; the sample transactions demonstrate a query with cancellation and runtime validation.
 
 ## API and server state
 
@@ -51,8 +51,8 @@ Date-only sample values are rendered at UTC midnight, with UTC as the default ti
 
 Use AlignUI/Radix semantics, labels, focus management, and keyboard behavior. Shared fields associate errors with inputs; status feedback is announced. The shell includes a skip link, keyboard focus is visible, reduced motion is respected, and tables scroll on narrow screens. Desktop and mobile smoke tests verify routes and interactions; these tests do not certify WCAG compliance. Complete a manual screen-reader/contrast audit before launch.
 
-Inter is self-hosted from Fontsource to avoid build-time Google Fonts networking. Use next/image when real imagery is added. Avoid unnecessary providers, broad client imports, redundant global state, and premature caching of sensitive API data.
+Google Sans is the global font for body text, controls, navigation, tables, and other interface text. Poppins is the font for h1 through h6 headlines; use font-heading for a headline composition without a heading element. These are the only installed font families, self-hosted through src/styles/fonts.css from Fontsource without build-time Google Fonts networking. Code and monospace/serif utility aliases resolve to Google Sans rather than introducing other fonts. Use next/image when real imagery is added. Avoid unnecessary providers, broad client imports, redundant global state, and premature caching of sensitive API data.
 
 ## Operational configuration
 
-.env is the single native/Docker configuration source, parsed and expanded by scripts/load-env.ts. It replaces the earlier .env.local workflow. Next.js standalone output drives the production container and E2E runtime. next-themes remains the only theme manager. First-party source licensing is proprietary; third-party notices remain separate. See docs/docker.md and docs/releases.md for operations.
+.env is the single native/Docker configuration source, parsed and expanded by scripts/load-env.ts. It replaces the earlier .env.local workflow. Development containers use Compose Watch for source synchronization, configuration restarts, and dependency rebuilds; .env is mounted read-only and host dependencies are excluded. Next.js standalone output drives the production container and E2E runtime. next-themes remains the only theme manager. First-party source licensing is proprietary; third-party notices remain separate. See docs/docker.md and docs/releases.md for operations.

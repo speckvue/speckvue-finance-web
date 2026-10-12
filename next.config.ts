@@ -13,12 +13,21 @@
 
 import type { NextConfig } from 'next';
 
+import publicEnv from './src/lib/config/public-env';
+
 // ---------------------------------------------------------------------------
 // Types / Constants
 // ---------------------------------------------------------------------------
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  devIndicators: false,
+  allowedDevOrigins: [
+    new URL(publicEnv.NEXT_PUBLIC_APP_URL).hostname,
+    ...[process.env.APP_HOST, process.env.DOCKER_BIND_HOST].filter(
+      (host): host is string => !!host && host !== '0.0.0.0' && host !== '::',
+    ),
+  ],
   poweredByHeader: false,
   reactStrictMode: true,
   headers: async () => {

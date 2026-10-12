@@ -88,7 +88,7 @@ test('sample dashboard, table, navigation and theme work', async ({
   await page.getByRole('button', { name: 'Clear search' }).click();
   await expect(page.getByText('Monthly salary')).toBeVisible();
   await page.getByRole('button', { name: /Theme:/ }).click();
-  await page.getByRole('button', { name: /Theme:/ }).click();
+  await page.getByRole('menuitemradio', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.reload();
   await expect(page.locator('html')).toHaveClass(/dark/);

@@ -1,0 +1,14 @@
+/**
+ * @fileoverview Loads self-hosted Google Sans and Poppins font faces.
+ *
+ * Supplies the only application font families without remote font requests.
+ *
+ * @author Speckvue contributors
+ * @license LicenseRef-Speckvue-Proprietary
+ */
+
+@import '@fontsource-variable/google-sans/index.css';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';

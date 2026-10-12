@@ -10,7 +10,7 @@ The inventory covers buttons/groups/compact/fancy/link buttons, avatars/groups, 
 
 ## Tokens and imports
 
-AlignUI CLI 0.0.19 generated `src/styles/globals.css` with blue primary, gray neutral, OKLCH, CSS-first Tailwind v4 tokens, no prefix, and no Tailwind JS config. Tailwind/PostCSS are already installed explicitly through npm. The CLI's final dependency subprocess encountered this host's missing global npm executable after successful CSS generation; the same required packages were installed using npm-cli.js. On a normal Node/npm setup, `npm run alignui:tokens` runs the official workflow. It overwrites CSS: review the diff and restore the tw-animate-css import, local Inter font, focus and reduced-motion additions afterwards.
+AlignUI CLI 0.0.19 generated `src/styles/globals.css` with blue primary, gray neutral, OKLCH, CSS-first Tailwind v4 tokens, no prefix, and no Tailwind JS config. Tailwind/PostCSS are already installed explicitly through npm. The CLI's final dependency subprocess encountered this host's missing global npm executable after successful CSS generation; the same required packages were installed using npm-cli.js. On a normal Node/npm setup, `npm run alignui:tokens` runs the official workflow. It overwrites CSS: review the diff and restore the tw-animate-css import, Google Sans/Poppins font tokens and heading styles, class-based theme handling, focus and reduced-motion additions afterwards.
 
 Use direct imports, for example `import * as Button from '@/components/ui/button'`. No competing UI library is installed. Radix, React Aria, Sonner, DayPicker, cmdk and the remaining supporting packages are required by AlignUI's own public components. Remix Icon is the officially recommended icon library.
 
@@ -20,7 +20,7 @@ Original variants, tokens and composition are retained. Components using React h
 
 Legacy comma-separated grid templates were migrated to Tailwind 4 underscore syntax in alert, banner, accordion, vertical tabs, and vertical stepper. Calendar navigation placement and selected-day selectors were adapted to DayPicker 10's DOM structure. These are compatibility corrections to the existing AlignUI layouts.
 
-The class-based Tailwind dark variant is explicitly configured so next-themes selections affect both AlignUI's dark token values and dark utility overrides. Application status/amount text uses darker official palette shades in light mode and lighter shades in dark mode for readable contrast.
+The class-based Tailwind dark variant is explicitly configured so next-themes selections affect both AlignUI's dark token values and dark utility overrides. The duplicate prefers-color-scheme dark block is removed: its 88 token values remain in the matching .dark block, and next-themes controls system preference resolution. This prevents the operating system's dark preference from overriding an explicit Light selection. Application status/amount text uses darker official palette shades in light mode and lighter shades in dark mode for readable contrast.
 
 ## Updating
 

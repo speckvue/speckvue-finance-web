@@ -29,9 +29,44 @@ services:
       HEALTHCHECK_TIMEOUT_MS: ${HEALTHCHECK_TIMEOUT_MS}
       PORT: ${APP_PORT}
     volumes:
-      - .:/app
-      - dependencies:/app/node_modules
+      - ./.env:/app/.env:ro
       - next-cache:/app/.next
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          initial_sync: true
+          include:
+            - src/**
+            - public/**
+          ignore:
+            - node_modules/
+            - .next/
+        - action: sync+restart
+          path: ./scripts
+          target: /app/scripts
+          initial_sync: true
+        - action: sync+restart
+          path: ./next.config.ts
+          target: /app/next.config.ts
+          initial_sync: true
+        - action: sync+restart
+          path: ./tsconfig.json
+          target: /app/tsconfig.json
+          initial_sync: true
+        - action: sync+restart
+          path: ./postcss.config.mjs
+          target: /app/postcss.config.mjs
+          initial_sync: true
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./package-lock.json
+        - action: rebuild
+          path: ./.npmrc
+        - action: rebuild
+          path: ./Dockerfile
     init: true
     healthcheck:
       test: ['CMD', 'node', 'scripts/healthcheck.ts']
@@ -41,5 +76,4 @@ services:
       retries: ${DOCKER_HEALTH_RETRIES:?Set DOCKER_HEALTH_RETRIES in .env}
 
 volumes:
-  dependencies:
   next-cache:

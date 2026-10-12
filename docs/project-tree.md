@@ -49,7 +49,8 @@ speckvue-finance-web/
 │   └── verification.md
 ├── e2e/
 │   ├── accessibility.spec.ts
-│   └── smoke.spec.ts
+│   ├── smoke.spec.ts
+│   └── theme.spec.ts
 ├── eslint.config.mjs
 ├── next.config.ts
 ├── package-lock.json
@@ -210,8 +211,6 @@ speckvue-finance-web/
 │   │   ├── security/
 │   │   │   ├── safe-redirect.test.ts
 │   │   │   └── safe-redirect.ts
-│   │   ├── theme/
-│   │   │   └── next-theme.ts
 │   │   ├── utils/
 │   │   │   ├── add-money.ts
 │   │   │   ├── currency-digits.ts
@@ -228,6 +227,7 @@ speckvue-finance-web/
 │   ├── stores/
 │   │   └── shell-store.ts
 │   ├── styles/
+│   │   ├── fonts.css
 │   │   └── globals.css
 │   ├── test/
 │   │   ├── mocks/

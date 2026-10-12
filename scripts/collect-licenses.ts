@@ -40,7 +40,7 @@ const collectLicenses = () => {
     JSON.parse(readFileSync('package-lock.json', 'utf8')),
   );
   const sections: string[] = [
-    'Third-party runtime dependency license texts\n\nGenerated from installed production dependencies; Speckvue first-party licensing is in LICENSE. Vendored AlignUI and Inter notices are also preserved in THIRD_PARTY_NOTICES.md.\n',
+    'Third-party runtime dependency license texts\n\nGenerated from installed production dependencies; Speckvue first-party licensing is in LICENSE. Vendored AlignUI, Google Sans, and Poppins notices are also preserved in THIRD_PARTY_NOTICES.md.\n',
   ];
   let count = 0;
   for (const [directory, entry] of Object.entries(lock.packages)) {
@@ -77,6 +77,7 @@ const collectLicenses = () => {
     'THIRD_PARTY_LICENSES.txt',
     sections
       .join('\n')
+      .replaceAll('\r\n', '\n')
       .replace(/[\t ]+$/gm, '')
       .trimEnd() + '\n',
   );

@@ -4,9 +4,13 @@
 [![CodeQL](https://github.com/speckvue/speckvue-finance-web/actions/workflows/codeql.yml/badge.svg)](https://github.com/speckvue/speckvue-finance-web/actions/workflows/codeql.yml)
 ![License: proprietary](https://img.shields.io/badge/license-Speckvue_proprietary-lightgrey)
 
+Web application for Speckvue Finance, providing an intuitive interface to manage personal finances, track expenses, monitor income, and organize budgets.
+
 A public-facing personal finance product with proprietary source code maintained in a private Speckvue repository. See LICENSE. AlignUI and other third-party materials retain their separate licenses and attributions in THIRD_PARTY_NOTICES.md.
 
 The application provides a working sample dashboard and frontend architecture. Production authentication, real financial features and NestJS services are not implemented. Legal pages remain explicitly unapproved placeholders.
+
+Typography uses two self-hosted families: Google Sans for interface text and Poppins for headlines. All h1–h6 elements use Poppins; font-heading applies it to other headline compositions. Font definitions live in src/styles/fonts.css, and typography tokens live in src/styles/globals.css.
 
 ## Installation and native usage
 
@@ -32,7 +36,7 @@ Never commit .env or secret values. .env.example remains tracked. Public Next.js
 Use Docker Desktop's Linux engine or a Speckvue-managed Linux Docker engine.
 
 ```powershell
-npm run docker:up       # Hot reload, bind-mounted source, dependency/cache volumes.
+npm run docker:up       # Built-in Compose Watch: sync, hot reload, restart, rebuild.
 npm run docker:build    # docker build with validated arguments from .env.
 npm run docker:run      # docker run with the .env image, port and health settings.
 npm run docker:prod     # Hardened production Compose configuration.
@@ -60,22 +64,22 @@ All 49 public AlignUI UI entries are installed across 52 UI source files, plus i
 
 ## Commands
 
-| Command                                       | Purpose                                                              |
-| --------------------------------------------- | -------------------------------------------------------------------- |
-| npm run dev / build / start                   | Native .env-driven development, standalone build, production serving |
-| npm run typecheck                             | Strict TypeScript including indexed access checks                    |
-| npm run lint / lint:fix                       | ESLint flat config                                                   |
-| npm run format / format:check                 | Prettier with package.json and Tailwind plugins                      |
-| npm run style:check                           | Guide headers, arrow functions, spacing and nonempty sections        |
-| npm test / test:watch                         | Vitest and component tests                                           |
-| npm run test:e2e                              | Desktop/mobile verification using the standalone runtime             |
-| npm run commit                                | Conventional Commit prompt; commits only staged changes              |
-| npm run release / release:dry-run             | Authorized repository release / permission-aware dry run             |
-| npm run docker:build / docker:run             | .env-driven Docker CLI helpers                                       |
-| npm run docker:up / docker:prod / docker:down | Compose operations                                                   |
-| npm run docker:config / docker:smoke          | Configuration / actual container readiness verification              |
-| npm run audit:dependencies                    | Production dependency audit                                          |
-| npm run alignui:tokens                        | Official interactive token generator; overwrites CSS                 |
+| Command                                                      | Purpose                                                              |
+| ------------------------------------------------------------ | -------------------------------------------------------------------- |
+| npm run dev / build / start                                  | Native .env-driven development, standalone build, production serving |
+| npm run typecheck                                            | Strict TypeScript including indexed access checks                    |
+| npm run lint / lint:fix                                      | ESLint flat config                                                   |
+| npm run format / format:check                                | Prettier with package.json and Tailwind plugins                      |
+| npm run style:check                                          | Guide headers, arrow functions, spacing and nonempty sections        |
+| npm test / test:watch                                        | Vitest and component tests                                           |
+| npm run test:e2e                                             | Desktop/mobile verification using the standalone runtime             |
+| npm run commit                                               | Conventional Commit prompt; commits only staged changes              |
+| npm run release / release:dry-run                            | Authorized repository release / permission-aware dry run             |
+| npm run docker:build / docker:run                            | .env-driven Docker CLI helpers                                       |
+| npm run docker:up / docker:watch / docker:prod / docker:down | Compose Watch and service operations                                 |
+| npm run docker:config / docker:smoke                         | Configuration / actual container readiness verification              |
+| npm run audit:dependencies                                   | Production dependency audit                                          |
+| npm run alignui:tokens                                       | Official interactive token generator; overwrites CSS                 |
 
 ## Architecture and structure
 
@@ -103,7 +107,7 @@ The full source tree is recorded in docs/project-tree.md. Complete source conten
 
 Follow CONTRIBUTING.md and CODE_OF_CONDUCT.md. First-party code is for authorized Speckvue contributors. Husky/lint-staged format and lint staged changes; commitlint validates every commit message. Semantic-release updates versions/changelog and creates GitHub releases in the private repository from verified main commits. npmPublish=false and private=true remain enforced.
 
-CI, Docker validation, CodeQL and release workflows use standard GitHub-hosted Ubuntu runners. Repository privacy controls access to source and release metadata. No npm package or Docker image is published by these workflows. Configure release permissions/branch rules as described in docs/releases.md. No release, commit, push or deployment was executed during scaffold creation.
+CI, Docker validation, CodeQL and release workflows use standard GitHub-hosted Ubuntu runners. Repository privacy controls access to source and release metadata. No npm package or Docker image is published by these workflows. Configure release permissions/branch rules as described in docs/releases.md. The initial scaffold has a v0.1.0 baseline tag. Authorized pushes to main trigger CI and Docker validation; successful frontend verification enables the private repository release workflow. Remote workflow results are available in GitHub Actions.
 
 ## Verification and remaining work
 

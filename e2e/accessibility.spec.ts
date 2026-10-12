@@ -61,7 +61,7 @@ test('dark dashboard and mobile navigation meet automated accessibility checks',
 }) => {
   await page.goto('/dashboard');
   await page.getByRole('button', { name: /Theme:/ }).click();
-  await page.getByRole('button', { name: /Theme:/ }).click();
+  await page.getByRole('menuitemradio', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   expect(
     (

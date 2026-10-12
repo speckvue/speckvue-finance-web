@@ -11,9 +11,11 @@ Copy-Item .env.example .env  # Only for a new checkout; preserve an existing .en
 npm run docker:up
 ```
 
-The command invokes `docker compose --env-file .env up --build`. Source is bind-mounted, dependencies and Next cache use separate volumes, and the development target uses Webpack with configurable polling for Docker Desktop hot reload. Compose overrides APP_HOST with the DOCKER_HOSTNAME value from .env so the container accepts mapped connections; native startup uses APP_HOST from the same file.
+The command invokes `docker compose --env-file .env up --build --watch`. Use Docker Compose 2.32.2 or newer. Docker's built-in Watch synchronizes source and public assets into the container, where Next.js applies hot reload. Scripts, Next.js configuration, TypeScript configuration, and PostCSS configuration synchronize and restart the service. Changes to package.json, package-lock.json, .npmrc, or Dockerfile rebuild the image and replace the service. See [Compose Watch](https://docs.docker.com/compose/how-tos/file-watch/).
 
-After changing package-lock.json, update the dependency volume with `docker compose --env-file .env run --rm web npm ci` and recreate the service. `npm run docker:down` stops development services without deleting named volumes.
+Dependencies stay inside the image so rebuilds use the newly installed Linux packages. Only the Next.js cache uses a named volume. The central .env is mounted read-only; restart the Watch command after changing environment values, ports, Compose configuration, or watch rules. Compose overrides APP_HOST with DOCKER_HOSTNAME so the container accepts mapped connections, while native startup uses APP_HOST. Polling defaults to false because synchronized files produce events inside the container; DOCKER_POLLING remains an optional fallback. Host dependencies, build output, private configuration, and Git data are excluded from source synchronization.
+
+For separate Watch output, use `npm run docker:watch`, which invokes `docker compose --env-file .env watch`. Stop the Watch command with Ctrl+C; `npm run docker:down` removes the service without deleting the Next.js cache volume.
 
 ## Production
 
@@ -53,4 +55,4 @@ Public variables are compiled into the client bundle: rebuild after changing NEX
 
 GitHub-hosted Ubuntu runners verify native builds, Docker image readiness, and releases in the private repository. Repository permissions protect source access. No registry push or artifact publication is configured.
 
-The local Linux engine is now available. The production image built and passed non-root and readiness smoke checks. Hardened production Compose reached a healthy state with its read-only filesystem and capability restrictions. Development Compose reached a healthy state; dashboard rendering and mounted source updates are checked separately. Verification containers are stopped after checks, while reusable images and dependency/cache volumes are retained.
+The local Linux engine is now available. The production image built and passed non-root and readiness smoke checks. Hardened production Compose reached a healthy state with its read-only filesystem and capability restrictions. Development startup, dashboard rendering, and source updates are checked separately. Verification containers are stopped after checks, while reusable images and cache volumes are retained.

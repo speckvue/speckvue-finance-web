@@ -19,7 +19,8 @@ Verified locally on 2026-10-13 (Asia/Calcutta) with Node 24.19.0 and npm 12.2.0 
 | npm run docker:build            | Pass: production Linux image built successfully                             |
 | npm run docker:smoke            | Pass: configured non-root user and readiness response                       |
 | Production Compose              | Pass: hardened service reached healthy state                                |
-| Development Compose             | Pass: healthy service, dashboard rendering, and mounted source update       |
+| Development Compose             | Pass: healthy service and dashboard rendering                               |
+| Compose Watch                   | Pass: creation/deletion sync, hot reload, config restart, image rebuild     |
 | npm ls --all --json             | Pass: no dependency/peer problems after npm prune                           |
 | git diff --check                | Pass; initial repository had no tracked application files                   |
 
@@ -42,4 +43,10 @@ Commitlint accepted a valid Conventional Commit fixture and rejected an invalid 
 
 The full development audit still reports 20 findings. The latest npm 12 override was trialed and removed because its bundled vulnerable versions remained unchanged. Latest official braces remains 3.0.3 with the advisory outstanding. No forced framework downgrade, unofficial replacement package, or advisory suppression was applied. Production audit remains clean.
 
-GitHub Actions configuration is written but has not been run on GitHub. No code was committed, pushed or deployed. No backend services or production financial features were created.
+Compose Watch was verified with polling disabled. Source creation and deletion synchronized into the container; changing a dashboard heading hot-reloaded the rendered page. A temporary TypeScript configuration edit restarted the service, and a temporary Dockerfile comment triggered an image rebuild and container replacement. All temporary edits were restored and verification services were stopped. The requested product description was confirmed in rendered metadata.
+
+The application is now running in Docker for review with Watch enabled. Google Sans and Poppins replace the former font dependency: browser checks confirmed local font downloads, Google Sans on body text and controls, and Poppins on headlines in dashboard, authentication, legal, and missing-page routes. The font license texts are preserved and the production build passed. The expanded 14-case browser suite passed across the Docker development frontend and a separate production session-protection server; three cases initially hit development compilation timeouts and passed when rerun with development-only time limits. Standard production test limits remain unchanged.
+
+Theme regression cases verify explicit Light, Dark, and System choices, persistence on reload, actual background color changes, and system preference updates on desktop and mobile. The duplicate operating-system dark CSS block was removed while preserving the 88 matching class-based dark tokens. The appearance menu also passed its accessibility scan. Development origin configuration uses the hostnames already defined in .env. The development indicator is hidden; framework diagnostic fonts are separate from the two application font families.
+
+The initial scaffold was committed as 9821f65 with baseline tag v0.1.0. The repository owner authorized committing all remaining changes and pushing main and the baseline tag to the private GitHub repository. Remote CI, Docker validation, and release results must be checked in GitHub Actions separately from the local checks recorded here. Backend services and full financial features remain outside this frontend scaffold's scope.

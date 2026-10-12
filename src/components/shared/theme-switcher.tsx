@@ -1,7 +1,7 @@
 /**
  * @fileoverview Renders the theme preference control using next-themes.
  *
- * Lets users switch appearance while preserving their selected preference.
+ * Offers explicit Light, Dark, and System choices and preserves the selection.
  *
  * @author Speckvue contributors
  * @license LicenseRef-Speckvue-Proprietary
@@ -15,15 +15,30 @@
 
 import subscribe from '@/lib/utils/noop-subscribe';
 
-import nextTheme from '@/lib/theme/next-theme';
-
 import { useSyncExternalStore } from 'react';
 
 import { useTheme } from 'next-themes';
 
 import * as Button from '@/components/ui/button';
 
-import { RiMoonLine, RiSunLine, RiComputerLine } from '@remixicon/react';
+import * as Dropdown from '@/components/ui/dropdown';
+
+import {
+  RiMoonLine,
+  RiSunLine,
+  RiComputerLine,
+  RiCheckLine,
+} from '@remixicon/react';
+
+// ---------------------------------------------------------------------------
+// Types / Constants
+// ---------------------------------------------------------------------------
+
+const preferences = [
+  { value: 'light', label: 'Light', icon: RiSunLine },
+  { value: 'dark', label: 'Dark', icon: RiMoonLine },
+  { value: 'system', label: 'System', icon: RiComputerLine },
+] as const;
 
 // ---------------------------------------------------------------------------
 // Main implementation
@@ -36,29 +51,58 @@ const ThemeSwitcher = () => {
     () => false,
   );
   const { theme, setTheme } = useTheme();
-  const current = mounted ? theme : 'system';
-  const next = nextTheme({ preference: current ?? 'system' });
+  const current = mounted ? (theme ?? 'system') : 'system';
   return (
-    <Button.Root
-      variant="neutral"
-      mode="ghost"
-      size="small"
-      aria-label={`Theme: ${current}. Switch to ${next}`}
-      onClick={() => setTheme(next)}
-    >
-      <Button.Icon
-        as={
-          current === 'dark'
-            ? RiMoonLine
-            : current === 'light'
-              ? RiSunLine
-              : RiComputerLine
-        }
-      />
-      <span className="hidden sm:inline">
-        {current === 'dark' ? 'Dark' : current === 'light' ? 'Light' : 'System'}
-      </span>
-    </Button.Root>
+    <Dropdown.Root modal={false}>
+      <Dropdown.Trigger asChild>
+        <Button.Root
+          variant="neutral"
+          mode="ghost"
+          size="small"
+          disabled={!mounted}
+          aria-label={`Theme: ${current}. Choose appearance`}
+        >
+          <Button.Icon
+            as={
+              current === 'dark'
+                ? RiMoonLine
+                : current === 'light'
+                  ? RiSunLine
+                  : RiComputerLine
+            }
+          />
+          <span className="hidden sm:inline">
+            {current === 'dark'
+              ? 'Dark'
+              : current === 'light'
+                ? 'Light'
+                : 'System'}
+          </span>
+        </Button.Root>
+      </Dropdown.Trigger>
+      <Dropdown.Content align="end">
+        <Dropdown.RadioGroup
+          aria-label="Appearance"
+          value={current}
+          onValueChange={setTheme}
+        >
+          {preferences.map(({ value, label, icon }) => (
+            <Dropdown.RadioItem
+              key={value}
+              value={value}
+              className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm text-text-strong-950 outline-none data-[highlighted]:bg-bg-weak-50"
+            >
+              <Dropdown.ItemIcon as={icon} />
+              <span className="flex-1">{label}</span>
+              <RiCheckLine
+                aria-hidden="true"
+                className={`size-4 ${current === value ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </Dropdown.RadioItem>
+          ))}
+        </Dropdown.RadioGroup>
+      </Dropdown.Content>
+    </Dropdown.Root>
   );
 };
 

@@ -15,7 +15,7 @@ import type { Metadata } from 'next';
 
 import { headers } from 'next/headers';
 
-import '@fontsource-variable/inter';
+import '@/styles/fonts.css';
 
 import '@/styles/globals.css';
 
@@ -27,16 +27,19 @@ import publicEnv from '@/lib/config/public-env';
 // Types / Constants
 // ---------------------------------------------------------------------------
 
+const appDescription =
+  'Web application for Speckvue Finance, providing an intuitive interface to manage personal finances, track expenses, monitor income, and organize budgets.';
+
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.NEXT_PUBLIC_APP_URL),
   title: {
     default: publicEnv.NEXT_PUBLIC_APP_NAME,
     template: `%s | ${publicEnv.NEXT_PUBLIC_APP_NAME}`,
   },
-  description: 'A clear, organized workspace for your personal finances.',
+  description: appDescription,
   openGraph: {
     title: publicEnv.NEXT_PUBLIC_APP_NAME,
-    description: 'A clear view of your money.',
+    description: appDescription,
     type: 'website',
   },
   robots: { index: false, follow: false },

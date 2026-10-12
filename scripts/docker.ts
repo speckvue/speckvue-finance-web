@@ -1,5 +1,5 @@
 /**
- * @fileoverview Runs Docker build, Compose, readiness, and smoke-check commands from .env.
+ * @fileoverview Runs Docker build, Compose Watch, readiness, and smoke-check commands from .env.
  *
  * Keeps container execution aligned with the central project configuration.
  *
@@ -68,7 +68,10 @@ const docker = async ({ command }: { command: string }) => {
       ];
       break;
     case 'up':
-      args = ['compose', '--env-file', '.env', 'up', '--build'];
+      args = ['compose', '--env-file', '.env', 'up', '--build', '--watch'];
+      break;
+    case 'watch':
+      args = ['compose', '--env-file', '.env', 'watch'];
       break;
     case 'prod':
       args = [
@@ -164,7 +167,9 @@ const docker = async ({ command }: { command: string }) => {
       }
     }
     default:
-      throw new Error('Choose build, run, up, prod, down, config or smoke.');
+      throw new Error(
+        'Choose build, run, up, watch, prod, down, config or smoke.',
+      );
   }
   const result = spawnSync('docker', args, { stdio: 'inherit', shell: false });
   process.exitCode = result.status ?? 1;
