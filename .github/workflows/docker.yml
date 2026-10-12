@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v2
+        with:
+          version: v5.5.1
+      - name: Report Docker toolchain
+        run: |
+          docker version
+          docker compose version
       - uses: actions/setup-node@v4
         with:
           node-version: 24

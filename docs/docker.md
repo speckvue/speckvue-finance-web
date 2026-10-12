@@ -53,6 +53,6 @@ Public variables are compiled into the client bundle: rebuild after changing NEX
 
 `npm run docker:config` and `docker compose --env-file .env -f docker-compose.prod.yml config --quiet` validate both configurations without needing an engine. `npm run docker:smoke` checks the configured non-root user and live readiness endpoint, then removes only the test container it created.
 
-GitHub-hosted Ubuntu runners verify native builds, Docker image readiness, and releases in the private repository. Repository permissions protect source access. No registry push or artifact publication is configured.
+GitHub-hosted Ubuntu runners verify native builds, Docker image readiness, and releases in the private repository. The Docker workflow installs Compose v5.5.1 with Docker's official setup action before validating either configuration, matching the locally verified version. It reports the engine and Compose versions in the run log; runner image defaults can be too old to parse Watch's `initial_sync` field. Repository permissions protect source access. No registry push or artifact publication is configured.
 
 The local Linux engine is now available. The production image built and passed non-root and readiness smoke checks. Hardened production Compose reached a healthy state with its read-only filesystem and capability restrictions. Development startup, dashboard rendering, and source updates are checked separately. Verification containers are stopped after checks, while reusable images and cache volumes are retained.
