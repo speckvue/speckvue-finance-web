@@ -29,7 +29,7 @@ Keep accessible input IDs stable and unique. Use field.handleBlur and field.hand
 
 ## Verification
 
-Run `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm test`, and `npm run build`. E2E tests use a production build: `npx playwright install chromium` then `npm run test:e2e`. Playwright explicitly enables sample mode for its server. MSW is configured for tests with unhandled frames rejected, and handlers can be added once a real API contract exists. API unit tests use isolated fetch fixtures rather than asserting invented backend endpoints.
+Run `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm test`, and `npm run build`. E2E tests use a production build: `npx playwright install chromium` then `npm run test:e2e`. Playwright starts the compiled template server. MSW is configured for tests with unhandled frames rejected, and handlers can be added once a real API contract exists. API unit tests use isolated fetch fixtures rather than asserting invented backend endpoints.
 
 Use tests for meaningful invariants: monetary precision, response validation, unsafe redirects, accessible recovery, form errors, and table filtering. Browser tests also run axe checks against every implemented route, invalid form feedback, dark appearance, and mobile navigation, including keyboard dismissal and focus return. Automated accessibility checks complement manual assistive-technology review. Inspect changed UI at desktop/mobile widths. Test cross-origin cookie and CSRF behavior with the real backend before launch.
 
@@ -39,6 +39,6 @@ Both repositories use Prettier (two spaces, single quotes, semicolons, trailing 
 
 Use focused modules and descriptive names. Use function declarations, arrow functions, classes, and named/default exports where they fit the framework and API. There is no one-function-per-file rule. Do not add decorative divider blocks or repetitive file headers. Add concise comments to explain intent, security boundaries, unexpected behavior, or a non-obvious tradeoff. Keep types near their use and let Prettier handle layout. Preserve vendor attribution and license notices.
 
-Keep strict TypeScript and meaningful tests. Validate untrusted input at boundaries, narrow unknown errors, and keep financial amounts as exact decimal strings. Use signup, signin, and signout consistently in authentication code. Existing public frontend URL slugs /sign-in and /sign-up are retained for compatibility.
+Keep strict TypeScript and meaningful tests. Validate untrusted input at boundaries, narrow unknown errors, and keep financial amounts as exact decimal strings. Use signup, signin, and signout consistently in authentication code.
 
 Use Conventional Commits. Staged files run ESLint and Prettier; CI runs static checks, tests, builds, and the runtime dependency audit. Run npm run check and npm run test:ci before review. Configuration lives in .env; never commit it or place secrets in NEXT_PUBLIC_* variables.

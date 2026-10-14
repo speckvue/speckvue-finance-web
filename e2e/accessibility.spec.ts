@@ -1,60 +1,14 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-test('routes and validation feedback meet automated accessibility checks', async ({
-  page,
-}) => {
-  for (const route of [
-    '/dashboard',
-    '/sign-in',
-    '/sign-up',
-    '/forgot-password',
-    '/reset-password',
-    '/privacy-policy',
-    '/terms-of-service',
-    '/cookie-policy',
-  ]) {
-    await page.goto(route);
-    await expect(page.locator('h1')).toBeVisible();
-    const result = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
-      .analyze();
-    expect(
-      result.violations,
-      `${route}: ${JSON.stringify(result.violations.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => node.target) })))}`,
-    ).toEqual([]);
-  }
-  await page.goto('/sign-up');
-  await page
-    .getByRole('button', { name: 'Validate registration form' })
-    .click();
-  await expect(page.getByText('Enter a valid email address.')).toBeVisible();
-  expect(
-    (
-      await new AxeBuilder({ page })
-        .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
-        .analyze()
-    ).violations,
-  ).toEqual([]);
-});
-
-test('dark dashboard and mobile navigation meet automated accessibility checks', async ({
-  page,
-}) => {
-  await page.goto('/dashboard');
-  await page.getByRole('button', { name: /Theme:/ }).click();
-  await page.getByRole('menuitemradio', { name: 'Dark', exact: true }).click();
-  await expect(page.locator('html')).toHaveClass(/dark/);
-  expect(
-    (
-      await new AxeBuilder({ page })
-        .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
-        .analyze()
-    ).violations,
-  ).toEqual([]);
-  if ((page.viewportSize()?.width ?? 1280) < 1024) {
-    await page.getByRole('button', { name: 'Open navigation' }).click();
-    await expect(page.getByRole('dialog')).toBeVisible();
+for (const theme of ['Light', 'Dark'] as const) {
+  test('starter page is accessible in ' + theme + ' mode', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: /Theme:/ }).click();
+    await page.getByRole('menuitemradio', { name: theme, exact: true }).click();
+    await expect(page.locator('html')).toHaveClass(
+      new RegExp(theme.toLowerCase()),
+    );
     expect(
       (
         await new AxeBuilder({ page })
@@ -62,9 +16,5 @@ test('dark dashboard and mobile navigation meet automated accessibility checks',
           .analyze()
       ).violations,
     ).toEqual([]);
-    await page.keyboard.press('Escape');
-    await expect(
-      page.getByRole('button', { name: 'Open navigation' }),
-    ).toBeFocused();
-  }
-});
+  });
+}

@@ -44,8 +44,6 @@ const environmentSchema = z.object({
   APP_PORT: port,
   APP_HOST: z.string().regex(/^[a-zA-Z0-9.:-]+$/),
   API_PORT: port,
-  APP_PROTECTION_PORT: port,
-  ENABLE_DEMO_MODE: z.enum(['true', 'false']),
   DEV_NODE_ENV: z.literal('development'),
   PROD_NODE_ENV: z.literal('production'),
   NODE_IMAGE: z.string().min(1),

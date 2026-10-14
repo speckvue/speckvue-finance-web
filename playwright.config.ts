@@ -8,8 +8,6 @@ const env = loadEnv();
 
 const baseURL = `http://${env.APP_HOST}:${env.APP_PORT}`;
 
-const protectedURL = `http://${env.APP_HOST}:${env.APP_PROTECTION_PORT}`;
-
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -24,26 +22,10 @@ export default defineConfig({
       use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' },
     },
   ],
-  webServer: [
-    {
-      command: 'node .next/standalone/server.js',
-      url: baseURL,
-      reuseExistingServer: false,
-      env: {
-        ENABLE_DEMO_MODE: 'true',
-        PORT: String(env.APP_PORT),
-        HOSTNAME: env.APP_HOST,
-      },
-    },
-    {
-      command: 'node .next/standalone/server.js',
-      url: protectedURL + '/sign-in',
-      reuseExistingServer: false,
-      env: {
-        ENABLE_DEMO_MODE: 'false',
-        PORT: String(env.APP_PROTECTION_PORT),
-        HOSTNAME: env.APP_HOST,
-      },
-    },
-  ],
+  webServer: {
+    command: 'node .next/standalone/server.js',
+    url: baseURL,
+    reuseExistingServer: false,
+    env: { PORT: String(env.APP_PORT), HOSTNAME: env.APP_HOST },
+  },
 });

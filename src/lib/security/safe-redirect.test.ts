@@ -10,11 +10,9 @@ it.each([
   '/%zz',
   null,
 ])('rejects unsafe redirect %s', (value) => {
-  expect(safeRedirect(value)).toBe('/dashboard');
+  expect(safeRedirect(value)).toBe('/');
 });
 
 it('preserves local paths and search parameters', () => {
-  expect(safeRedirect('/dashboard?view=monthly')).toBe(
-    '/dashboard?view=monthly',
-  );
+  expect(safeRedirect('/?view=monthly')).toBe('/?view=monthly');
 });

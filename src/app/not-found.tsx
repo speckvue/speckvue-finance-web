@@ -10,7 +10,7 @@ const NotFound = () => {
         This page may have moved or does not exist yet.
       </p>
       <Button.Root asChild>
-        <Link href="/dashboard">Back to workspace</Link>
+        <Link href="/">Back to home</Link>
       </Button.Root>
     </main>
   );

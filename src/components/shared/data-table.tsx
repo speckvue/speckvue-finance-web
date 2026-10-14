@@ -102,8 +102,8 @@ const DataTable = <T extends object>({
             <Input.Wrapper>
               <Input.Icon as={RiSearchLine} />
               <Input.Input
-                aria-label="Search transactions"
-                placeholder="Search transactions..."
+                aria-label="Search records"
+                placeholder="Search records..."
                 value={activeSearch}
                 onChange={(e) => {
                   table.setGlobalFilter(e.target.value);
@@ -209,8 +209,8 @@ const DataTable = <T extends object>({
               <Table.Row>
                 <Table.Cell colSpan={span}>
                   <Feedback
-                    title="Loading transactions"
-                    description="Preparing your sample workspace…"
+                    title="Loading records"
+                    description="Loading data…"
                   />
                 </Table.Cell>
               </Table.Row>
@@ -218,7 +218,7 @@ const DataTable = <T extends object>({
               <Table.Row>
                 <Table.Cell colSpan={span}>
                   <Feedback
-                    title="No transactions found"
+                    title="No records found"
                     description="Try a different search or clear the filter."
                     action={activeSearch ? 'Clear search' : undefined}
                     onAction={() => table.setGlobalFilter('')}

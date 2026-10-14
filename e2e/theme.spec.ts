@@ -5,7 +5,7 @@ for (const system of ['light', 'dark'] as const) {
     page,
   }) => {
     await page.emulateMedia({ colorScheme: system });
-    await page.goto('/dashboard');
+    await page.goto('/');
     const trigger = page.getByRole('button', { name: /Theme:/ });
     await expect(trigger).toBeEnabled();
     await expect(page.locator('html')).toHaveClass(new RegExp(system));

@@ -1,4 +1,4 @@
-const safeRedirect = (value: unknown, fallback = '/dashboard'): string => {
+const safeRedirect = (value: unknown, fallback = '/'): string => {
   if (
     typeof value !== 'string' ||
     !value.startsWith('/') ||

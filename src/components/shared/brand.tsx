@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Brand = () => {
   return (
     <Link
-      href="/dashboard"
+      href="/"
       aria-label="Speckvue Finance home"
       className="flex items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-primary-base"
     >

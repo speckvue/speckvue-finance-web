@@ -1,278 +1,114 @@
-# Project tree
-
-Generated and local configuration/cache files are omitted.
+# Source inventory
 
 ```text
-.dockerignore
-.editorconfig
-.gitattributes
-.github/
-  workflows/
-    ci.yml
-    codeql.yml
-    docker.yml
-    release.yml
-.gitignore
-.husky/
-  commit-msg
-  pre-commit
-  _/
-    .gitignore
-    applypatch-msg
-    commit-msg
-    h
-    husky.sh
-    post-applypatch
-    post-checkout
-    post-commit
-    post-merge
-    post-rewrite
-    pre-applypatch
-    pre-auto-gc
-    pre-commit
-    pre-merge-commit
-    pre-push
-    pre-rebase
-    prepare-commit-msg
-.npmrc
-.prettierignore
-.prettierrc
-.releaserc.json
-.vscode/
-  extensions.json
-  settings.json
-CHANGELOG.md
-CODE_OF_CONDUCT.md
-commitlint.config.mjs
-CONTRIBUTING.md
-docker-compose.prod.yml
-docker-compose.yml
-Dockerfile
-docs/
-  alignui-inventory.json
-  alignui.md
-  architecture.md
-  conventions.md
-  docker.md
-  infrastructure.md
-  project-tree.md
-  releases.md
-  verification.md
-e2e/
-  accessibility.spec.ts
-  smoke.spec.ts
-  theme.spec.ts
-eslint.config.mjs
-LICENSE
-next-env.d.ts
-next.config.ts
-package-lock.json
-package.json
-playwright.config.ts
-postcss.config.mjs
-README.md
-scripts/
-  collect-licenses.ts
-  commit.ts
-  configure-local.cjs
-  docker.ts
-  healthcheck.ts
-  load-env.ts
-  prepare-standalone.ts
-  release.ts
-  run-app.ts
-SECURITY.md
-src/
-  app/
-    (auth)/
-      forgot-password/
-        page.tsx
-      layout.tsx
-      reset-password/
-        page.tsx
-      sign-in/
-        page.tsx
-      sign-up/
-        page.tsx
-    (legal)/
-      cookie-policy/
-        page.tsx
-      layout.tsx
-      privacy-policy/
-        page.tsx
-      terms-of-service/
-        page.tsx
-    (main)/
-      dashboard/
-        page.tsx
-      layout.tsx
-    api/
-      backend-status/
-        route.ts
-      health/
-        route.test.ts
-        route.ts
-    error.tsx
-    global-error.tsx
-    icon.svg
-    layout.tsx
-    loading.tsx
-    not-found.tsx
-    page.tsx
-    robots.ts
-  components/
-    layouts/
-      app-shell.tsx
-      navigation.tsx
-    shared/
-      access-state.tsx
-      brand.tsx
-      data-table.test.tsx
-      data-table.tsx
-      demo-notice.tsx
-      feedback.test.tsx
-      feedback.tsx
-      form-field.tsx
-      legal-placeholder.tsx
-      text-field.tsx
-      theme-switcher.tsx
-    ui/
-      accordion.tsx
-      alert.tsx
-      avatar-empty-icons.tsx
-      avatar-group-compact.tsx
-      avatar-group.tsx
-      avatar.tsx
-      badge.tsx
-      banner.tsx
-      breadcrumb.tsx
-      button-group.tsx
-      button.tsx
-      checkbox.tsx
-      color-picker.tsx
-      command-menu.tsx
-      compact-button.tsx
-      datepicker.tsx
-      digit-input.tsx
-      divider.tsx
-      dot-stepper.tsx
-      drawer.tsx
-      dropdown.tsx
-      fancy-button.tsx
-      file-format-icon.tsx
-      file-upload.tsx
-      hint.tsx
-      horizontal-stepper.tsx
-      input.tsx
-      kbd.tsx
-      label.tsx
-      link-button.tsx
-      modal.tsx
-      notification.tsx
-      pagination.tsx
-      popover.tsx
-      progress-bar.tsx
-      progress-circle.tsx
-      radio.tsx
-      rating.tsx
-      segmented-control.tsx
-      select.tsx
-      slider.tsx
-      status-badge.tsx
-      switch.tsx
-      tab-menu-horizontal.tsx
-      tab-menu-vertical.tsx
-      table.tsx
-      tag.tsx
-      textarea.tsx
-      toast-alert.tsx
-      toast.tsx
-      tooltip.tsx
-      vertical-stepper.tsx
-  features/
-    auth/
-      components/
-        auth-form.test.tsx
-        auth-form.tsx
-    dashboard/
-      components/
-        dashboard.tsx
-        transaction-table.tsx
-      data/
-        demo-query-options.ts
-        transactions.ts
-      hooks/
-        use-demo-transactions.ts
-        use-reset-demo.ts
-  hooks/
-    use-tab-observer.tsx
-  instrumentation.ts
-  lib/
-    api/
-      api-error.ts
-      client.test.ts
-      client.ts
-    auth/
-      require-session.ts
-      session.ts
-    config/
-      infrastructure-env.ts
-      public-env.test.ts
-      public-env.ts
-      server-env.ts
-    constants/
-      table-features.ts
-    logging/
-      create-logger.test.ts
-      create-logger.ts
-      logger.ts
-    providers/
-      app-providers.tsx
-    query/
-      client.ts
-      keys.ts
-    redis/
-      cache.test.ts
-      cache.ts
-      client.ts
-    security/
-      safe-redirect.test.ts
-      safe-redirect.ts
-    theme/
-    utils/
-      add-money.ts
-      currency-digits.ts
-      date.ts
-      format-percent.ts
-      money.test.ts
-      money.ts
-      noop-subscribe.ts
-      parse-money.ts
-    validations/
-      auth.test.ts
-      auth.ts
-  proxy.ts
-  stores/
-    shell-store.ts
-  styles/
-    fonts.css
-    globals.css
-  test/
-    mocks/
-      server.ts
-    setup.ts
-  types/
-    api.ts
-    money.ts
-  utils/
-    cn.ts
-    polymorphic.ts
-    recursive-clone-children.ts
-    tv.ts
-templates/
-  document.md
-THIRD_PARTY_LICENSES.txt
-THIRD_PARTY_NOTICES.md
-tsconfig.json
-vitest.config.ts
+src/app/api/health/route.test.ts
+src/app/api/health/route.ts
+src/app/error.tsx
+src/app/global-error.tsx
+src/app/icon.svg
+src/app/layout.tsx
+src/app/loading.tsx
+src/app/not-found.tsx
+src/app/page.tsx
+src/app/robots.ts
+src/components/shared/brand.tsx
+src/components/shared/data-table.test.tsx
+src/components/shared/data-table.tsx
+src/components/shared/feedback.test.tsx
+src/components/shared/feedback.tsx
+src/components/shared/form-field.tsx
+src/components/shared/text-field.tsx
+src/components/shared/theme-switcher.tsx
+src/components/ui/accordion.tsx
+src/components/ui/alert.tsx
+src/components/ui/avatar-empty-icons.tsx
+src/components/ui/avatar-group-compact.tsx
+src/components/ui/avatar-group.tsx
+src/components/ui/avatar.tsx
+src/components/ui/badge.tsx
+src/components/ui/banner.tsx
+src/components/ui/breadcrumb.tsx
+src/components/ui/button-group.tsx
+src/components/ui/button.tsx
+src/components/ui/checkbox.tsx
+src/components/ui/color-picker.tsx
+src/components/ui/command-menu.tsx
+src/components/ui/compact-button.tsx
+src/components/ui/datepicker.tsx
+src/components/ui/digit-input.tsx
+src/components/ui/divider.tsx
+src/components/ui/dot-stepper.tsx
+src/components/ui/drawer.tsx
+src/components/ui/dropdown.tsx
+src/components/ui/fancy-button.tsx
+src/components/ui/file-format-icon.tsx
+src/components/ui/file-upload.tsx
+src/components/ui/hint.tsx
+src/components/ui/horizontal-stepper.tsx
+src/components/ui/input.tsx
+src/components/ui/kbd.tsx
+src/components/ui/label.tsx
+src/components/ui/link-button.tsx
+src/components/ui/modal.tsx
+src/components/ui/notification.tsx
+src/components/ui/pagination.tsx
+src/components/ui/popover.tsx
+src/components/ui/progress-bar.tsx
+src/components/ui/progress-circle.tsx
+src/components/ui/radio.tsx
+src/components/ui/rating.tsx
+src/components/ui/segmented-control.tsx
+src/components/ui/select.tsx
+src/components/ui/slider.tsx
+src/components/ui/status-badge.tsx
+src/components/ui/switch.tsx
+src/components/ui/tab-menu-horizontal.tsx
+src/components/ui/tab-menu-vertical.tsx
+src/components/ui/table.tsx
+src/components/ui/tag.tsx
+src/components/ui/textarea.tsx
+src/components/ui/toast-alert.tsx
+src/components/ui/toast.tsx
+src/components/ui/tooltip.tsx
+src/components/ui/vertical-stepper.tsx
+src/hooks/use-tab-observer.tsx
+src/instrumentation.ts
+src/lib/api/api-error.ts
+src/lib/api/client.test.ts
+src/lib/api/client.ts
+src/lib/config/infrastructure-env.ts
+src/lib/config/public-env.test.ts
+src/lib/config/public-env.ts
+src/lib/constants/table-features.ts
+src/lib/logging/create-logger.test.ts
+src/lib/logging/create-logger.ts
+src/lib/logging/logger.ts
+src/lib/providers/app-providers.tsx
+src/lib/query/client.ts
+src/lib/redis/cache.test.ts
+src/lib/redis/cache.ts
+src/lib/redis/client.ts
+src/lib/security/safe-redirect.test.ts
+src/lib/security/safe-redirect.ts
+src/lib/utils/add-money.ts
+src/lib/utils/currency-digits.ts
+src/lib/utils/date.ts
+src/lib/utils/format-percent.ts
+src/lib/utils/money.test.ts
+src/lib/utils/money.ts
+src/lib/utils/noop-subscribe.ts
+src/lib/utils/parse-money.ts
+src/lib/validations/auth.test.ts
+src/lib/validations/auth.ts
+src/proxy.ts
+src/styles/fonts.css
+src/styles/globals.css
+src/test/mocks/server.ts
+src/test/setup.ts
+src/types/api.ts
+src/types/money.ts
+src/utils/cn.ts
+src/utils/polymorphic.ts
+src/utils/recursive-clone-children.ts
+src/utils/tv.ts
 ```

@@ -17,10 +17,10 @@ it('filters rows and offers recovery from an empty search', async () => {
   );
   const user = userEvent.setup();
   await user.type(
-    screen.getByRole('textbox', { name: 'Search transactions' }),
+    screen.getByRole('textbox', { name: 'Search records' }),
     'missing',
   );
-  expect(screen.getByText('No transactions found')).toBeVisible();
+  expect(screen.getByText('No records found')).toBeVisible();
   await user.click(screen.getByRole('button', { name: 'Clear search' }));
   expect(screen.getByText('Salary')).toBeVisible();
   expect(screen.getByText('Rent')).toBeVisible();
