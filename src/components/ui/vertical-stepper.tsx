@@ -2,14 +2,13 @@
 
 // AlignUI VerticalStepper v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { RiArrowRightSLine } from '@remixicon/react';
-
 import { cn } from '@/utils/cn';
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import { RiArrowRightSLine } from '@remixicon/react';
+import * as React from 'react';
 
 const VERTICAL_STEPPER_ROOT_NAME = 'VerticalStepperRoot';
 const VERTICAL_STEPPER_ARROW_NAME = 'VerticalStepperArrow';
@@ -152,8 +151,8 @@ function VerticalStepperItemIndicator({
 VerticalStepperItemIndicator.displayName = VERTICAL_STEPPER_ITEM_INDICATOR_NAME;
 
 export {
-  VerticalStepperRoot as Root,
   VerticalStepperArrow as Arrow,
   VerticalStepperItem as Item,
   VerticalStepperItemIndicator as ItemIndicator,
+  VerticalStepperRoot as Root,
 };

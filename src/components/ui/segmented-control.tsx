@@ -2,13 +2,12 @@
 
 // AlignUI SegmentedControl v0.0.0
 
-import * as React from 'react';
+import { useTabObserver } from '@/hooks/use-tab-observer';
+import { cn } from '@/utils/cn';
 import { Slottable } from '@radix-ui/react-slot';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import mergeRefs from 'merge-refs';
-
-import { useTabObserver } from '@/hooks/use-tab-observer';
-import { cn } from '@/utils/cn';
+import * as React from 'react';
 
 const SegmentedControlRoot = TabsPrimitive.Root;
 SegmentedControlRoot.displayName = 'SegmentedControlRoot';
@@ -94,8 +93,8 @@ const SegmentedControlContent = React.forwardRef<
 SegmentedControlContent.displayName = 'SegmentedControlContent';
 
 export {
-  SegmentedControlRoot as Root,
-  SegmentedControlList as List,
-  SegmentedControlTrigger as Trigger,
   SegmentedControlContent as Content,
+  SegmentedControlList as List,
+  SegmentedControlRoot as Root,
+  SegmentedControlTrigger as Trigger,
 };

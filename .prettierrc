@@ -1,7 +1,5 @@
 {
   "singleQuote": true,
-  "plugins": ["prettier-plugin-packagejson", "prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./src/styles/globals.css",
   "semi": true,
   "tabWidth": 2,
   "trailingComma": "all",
@@ -10,18 +8,11 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "proseWrap": "preserve",
-  "overrides": [
-    {
-      "files": ["*.json", "*.yml", "*.yaml"],
-      "options": {
-        "tabWidth": 2
-      }
-    },
-    {
-      "files": "*.md",
-      "options": {
-        "proseWrap": "preserve"
-      }
-    }
-  ]
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-packagejson",
+    "prettier-plugin-tailwindcss"
+  ],
+  "organizeImportsSkipDestructiveCodeActions": true,
+  "tailwindStylesheet": "./src/styles/globals.css"
 }

@@ -1,23 +1,5 @@
-/**
- * @fileoverview Formats integer minor-unit amounts as localized currency text.
- *
- * Displays financial values without converting calculations to floating point.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import type { Money } from '@/types/money';
-
 import currencyDigits from './currency-digits';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const formatMoney = (
   { minorUnits, currency }: Money,
@@ -35,10 +17,4 @@ const formatMoney = (
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default formatMoney;
-
-// ---------------------------------------------------------------------------

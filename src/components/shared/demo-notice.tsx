@@ -1,25 +1,7 @@
-/**
- * @fileoverview Displays the sample-data notice.
- *
- * Makes clear that dashboard examples are not live financial records.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import * as Alert from '@/components/ui/alert';
-
 import { RiInformationLine } from '@remixicon/react';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const DemoNotice = () => {
   return (
@@ -32,10 +14,4 @@ const DemoNotice = () => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default DemoNotice;
-
-// ---------------------------------------------------------------------------

@@ -70,7 +70,6 @@ All 49 public AlignUI UI entries are installed across 52 UI source files, plus i
 | npm run typecheck                                            | Strict TypeScript including indexed access checks                    |
 | npm run lint / lint:fix                                      | ESLint flat config                                                   |
 | npm run format / format:check                                | Prettier with package.json and Tailwind plugins                      |
-| npm run style:check                                          | Guide headers, arrow functions, spacing and nonempty sections        |
 | npm test / test:watch                                        | Vitest and component tests                                           |
 | npm run test:e2e                                             | Desktop/mobile verification using the standalone runtime             |
 | npm run commit                                               | Conventional Commit prompt; commits only staged changes              |
@@ -114,3 +113,7 @@ CI, Docker validation, CodeQL and release workflows use standard GitHub-hosted U
 See docs/verification.md for actual results and limitations. Backend session/API contracts, CSRF/CORS, permissions, approved policies, deployment review and release permissions still need configuration. SECURITY.md describes private reporting.
 
 Production audit reports zero findings. The full audit currently reports 20 development-tool findings (18 high, 2 moderate), including unpatched braces and vulnerable dependencies bundled with the release plugin's npm version. Compatible audit fixes were attempted; major downgrades and silent vulnerability suppression were not applied. Review upstream updates before enabling release automation.
+
+## Shared infrastructure and conventions
+
+Both repos use the same Node 24/npm requirements, package metadata, formatting rules, and common check/test/format/audit scripts. Run `npm run env:setup` to initialize missing settings and secrets, and `npm run check` for static verification. Winston writes JSON console logs and daily/size-rotated application/error files with configurable retention. Redis is authenticated and used only on the server. See docs/infrastructure.md for configuration, Docker volumes, cache policy, and failure behavior.

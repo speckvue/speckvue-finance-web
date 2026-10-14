@@ -1,23 +1,5 @@
-/**
- * @fileoverview Tests allowed local redirects and rejection of unsafe destinations.
- *
- * Protects navigation against open redirect regressions.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { expect, it } from 'vitest';
-
 import safeRedirect from '@/lib/security/safe-redirect';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { expect, it } from 'vitest';
 
 it.each([
   'https://evil.example',
@@ -36,5 +18,3 @@ it('preserves local paths and search parameters', () => {
     '/dashboard?view=monthly',
   );
 });
-
-// ---------------------------------------------------------------------------

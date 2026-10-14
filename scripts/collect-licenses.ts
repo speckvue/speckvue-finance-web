@@ -1,25 +1,6 @@
-/**
- * @fileoverview Collects installed production package license and notice files.
- *
- * Generates third-party attribution text for the application distribution.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-
 import { join } from 'node:path';
-
 import { z } from 'zod';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const metadataSchema = z.object({
   name: z.string(),
@@ -30,10 +11,6 @@ const metadataSchema = z.object({
 const lockSchema = z.object({
   packages: z.record(z.string(), z.object({ dev: z.boolean().optional() })),
 });
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const collectLicenses = () => {
   const lock = lockSchema.parse(
@@ -88,10 +65,4 @@ const collectLicenses = () => {
 
 collectLicenses();
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default collectLicenses;
-
-// ---------------------------------------------------------------------------

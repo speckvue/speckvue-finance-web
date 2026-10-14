@@ -1,16 +1,3 @@
-/**
- * @fileoverview Renders a clearly marked placeholder for unapproved policy content.
- *
- * Avoids presenting unfinished legal pages as published customer policies.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 const LegalPlaceholder = ({ title }: { title: string }) => {
   return (
     <article className="max-w-2xl">
@@ -31,10 +18,4 @@ const LegalPlaceholder = ({ title }: { title: string }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default LegalPlaceholder;
-
-// ---------------------------------------------------------------------------

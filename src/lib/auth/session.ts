@@ -1,25 +1,6 @@
-/**
- * @fileoverview Caches server-side session state for the current request.
- *
- * Provides explicit demo or anonymous access until a verified session adapter is implemented.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import 'server-only';
-
-import { cache } from 'react';
-
 import serverEnv from '@/lib/config/server-env';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import { cache } from 'react';
+import 'server-only';
 
 export type Session = {
   userId: string;
@@ -40,13 +21,7 @@ const getSessionState = cache(async (): Promise<SessionState> => {
   return { status: 'anonymous' };
 });
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 // Invoke at protected page/data boundaries as well as layouts: RSC children
 // can render concurrently before a parent layout's redirect completes.
 
 export default getSessionState;
-
-// ---------------------------------------------------------------------------

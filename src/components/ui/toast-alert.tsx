@@ -1,5 +1,6 @@
 'use client';
-import * as React from 'react';
+import * as Alert from '@/components/ui/alert';
+import { toast } from '@/components/ui/toast';
 import {
   RiAlertFill,
   RiCheckboxCircleFill,
@@ -7,9 +8,7 @@ import {
   RiInformationFill,
   RiMagicFill,
 } from '@remixicon/react';
-
-import * as Alert from '@/components/ui/alert';
-import { toast } from '@/components/ui/toast';
+import * as React from 'react';
 
 type AlertToastProps = {
   t: string | number;

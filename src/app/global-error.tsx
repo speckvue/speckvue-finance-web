@@ -1,27 +1,8 @@
-/**
- * @fileoverview Renders a standalone error document when the root layout fails.
- *
- * Keeps recovery available when the normal application layout cannot render.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import * as Button from '@/components/ui/button';
-
 import '@/styles/fonts.css';
-
 import '@/styles/globals.css';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const GlobalError = ({
   reset,
@@ -44,10 +25,4 @@ const GlobalError = ({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default GlobalError;
-
-// ---------------------------------------------------------------------------

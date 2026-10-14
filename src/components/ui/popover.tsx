@@ -2,11 +2,10 @@
 
 // AlignUI Popover v0.0.0
 
-import * as React from 'react';
+import { cn } from '@/utils/cn';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { Slottable } from '@radix-ui/react-slot';
-
-import { cn } from '@/utils/cn';
+import * as React from 'react';
 
 const PopoverRoot = PopoverPrimitive.Root;
 const PopoverTrigger = PopoverPrimitive.Trigger;
@@ -82,9 +81,9 @@ const PopoverClose = React.forwardRef<
 PopoverClose.displayName = 'PopoverClose';
 
 export {
-  PopoverRoot as Root,
   PopoverAnchor as Anchor,
-  PopoverTrigger as Trigger,
-  PopoverContent as Content,
   PopoverClose as Close,
+  PopoverContent as Content,
+  PopoverRoot as Root,
+  PopoverTrigger as Trigger,
 };

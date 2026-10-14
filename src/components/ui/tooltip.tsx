@@ -2,10 +2,9 @@
 
 // AlignUI Tooltip v0.0.0
 
-import * as React from 'react';
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-
 import { tv, type VariantProps } from '@/utils/tv';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import * as React from 'react';
 
 const TooltipProvider = TooltipPrimitive.Provider;
 const TooltipRoot = TooltipPrimitive.Root;
@@ -117,8 +116,8 @@ const TooltipContent = React.forwardRef<
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
 export {
+  TooltipContent as Content,
   TooltipProvider as Provider,
   TooltipRoot as Root,
   TooltipTrigger as Trigger,
-  TooltipContent as Content,
 };

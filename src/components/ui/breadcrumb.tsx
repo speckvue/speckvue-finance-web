@@ -2,11 +2,10 @@
 
 // AlignUI Breadcrumb v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { cn } from '@/utils/cn';
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const BREADCRUMB_ROOT_NAME = 'BreadcrumbRoot';
 const BREADCRUMB_ITEM_NAME = 'BreadcrumbItem';
@@ -99,8 +98,8 @@ function BreadcrumbItemArrowIcon<T extends React.ElementType>({
 BreadcrumbItemArrowIcon.displayName = BREADCRUMB_ARROW_NAME;
 
 export {
-  BreadcrumbRoot as Root,
-  BreadcrumbItem as Item,
-  BreadcrumbItemIcon as Icon,
   BreadcrumbItemArrowIcon as ArrowIcon,
+  BreadcrumbItemIcon as Icon,
+  BreadcrumbItem as Item,
+  BreadcrumbRoot as Root,
 };

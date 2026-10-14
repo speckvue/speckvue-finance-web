@@ -1,37 +1,10 @@
-/**
- * @fileoverview Configures the unit test environment, setup, and source aliases.
- *
- * Runs isolated TypeScript and component tests with centralized environment settings.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { defineConfig } from 'vitest/config';
-
 import loadEnv from './scripts/load-env.ts';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const env = loadEnv();
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import react from '@vitejs/plugin-react';
-
 import { fileURLToPath } from 'node:url';
-
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
 
 export default defineConfig({
   plugins: [react()],
@@ -48,5 +21,3 @@ export default defineConfig({
     },
   },
 });
-
-// ---------------------------------------------------------------------------

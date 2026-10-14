@@ -12,3 +12,5 @@ dist
 CHANGELOG.md
 LICENSE
 THIRD_PARTY_LICENSES.txt
+
+logs/

@@ -1,23 +1,5 @@
-/**
- * @fileoverview Checks rendered routes for detectable accessibility violations.
- *
- * Covers desktop and mobile layouts, form errors, and both appearance modes.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import AxeBuilder from '@axe-core/playwright';
-
 import { expect, test } from '@playwright/test';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 test('routes and validation feedback meet automated accessibility checks', async ({
   page,
@@ -86,5 +68,3 @@ test('dark dashboard and mobile navigation meet automated accessibility checks',
     ).toBeFocused();
   }
 });
-
-// ---------------------------------------------------------------------------

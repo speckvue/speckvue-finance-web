@@ -1,16 +1,3 @@
-/**
- * @fileoverview Formats date strings using an explicit locale and time zone.
- *
- * Provides predictable dashboard dates with UTC as the default.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 const formatDate = (
   value: string,
   {
@@ -30,10 +17,4 @@ const formatDate = (
   }).format(date);
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default formatDate;
-
-// ---------------------------------------------------------------------------

@@ -1,27 +1,8 @@
-/**
- * @fileoverview Provides the action for resetting the demo transaction query.
- *
- * Lets dashboard recovery controls reload the sample data.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import queryKeys from '@/lib/query/keys';
-
 import mockTransactions from '@/features/dashboard/data/transactions';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import queryKeys from '@/lib/query/keys';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const useResetDemo = () => {
   const client = useQueryClient();
@@ -33,10 +14,4 @@ const useResetDemo = () => {
   });
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default useResetDemo;
-
-// ---------------------------------------------------------------------------

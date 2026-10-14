@@ -1,43 +1,17 @@
-/**
- * @fileoverview Renders and validates sign-in, registration, and password recovery forms.
- *
- * Provides reusable account screens without submitting credentials to an unfinished backend.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { useState } from 'react';
-
-import Link from 'next/link';
-
-import { useForm } from '@tanstack/react-form';
-
-import { z } from 'zod';
-
-import * as Button from '@/components/ui/button';
-
-import * as Alert from '@/components/ui/alert';
-
 import TextField from '@/components/shared/text-field';
-
-import {
+import * as Alert from '@/components/ui/alert';
+import * as Button from '@/components/ui/button';
+import signUpSchema, {
   emailSchema,
-  signInSchema,
   passwordSchema,
+  signInSchema,
 } from '@/lib/validations/auth';
-
-import signUpSchema from '@/lib/validations/auth';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import { useForm } from '@tanstack/react-form';
+import Link from 'next/link';
+import { useState } from 'react';
+import { z } from 'zod';
 
 export type AuthMode =
   'sign-in' | 'sign-up' | 'forgot-password' | 'reset-password';
@@ -64,10 +38,6 @@ const labels = {
     action: 'Validate new password',
   },
 };
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const AuthForm = ({ mode }: { mode: AuthMode }) => {
   const [message, setMessage] = useState('');
@@ -230,10 +200,4 @@ const AuthForm = ({ mode }: { mode: AuthMode }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default AuthForm;
-
-// ---------------------------------------------------------------------------

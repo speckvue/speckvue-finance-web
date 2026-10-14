@@ -1,9 +1,46 @@
 services:
+  redis:
+    image: ${REDIS_IMAGE:?Set REDIS_IMAGE in .env}
+    user: redis
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Initialize REDIS_PASSWORD in .env}
+      REDIS_INTERNAL_PORT: ${REDIS_INTERNAL_PORT}
+      REDIS_MAX_MEMORY: ${REDIS_MAX_MEMORY}
+    command:
+      [
+        '/bin/sh',
+        '-ec',
+        'exec redis-server --port "$$REDIS_INTERNAL_PORT" --requirepass "$$REDIS_PASSWORD" --maxmemory "$$REDIS_MAX_MEMORY" --maxmemory-policy noeviction --save "" --appendonly no',
+      ]
+    ports:
+      - '${DOCKER_BIND_HOST}:${REDIS_PORT}:${REDIS_INTERNAL_PORT}'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: ['/tmp:noexec,nosuid,size=16m']
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli -p "$$REDIS_INTERNAL_PORT" ping | grep -q PONG',
+        ]
+      interval: ${DOCKER_HEALTH_INTERVAL}
+      timeout: ${DOCKER_HEALTH_TIMEOUT}
+      retries: ${DOCKER_HEALTH_RETRIES}
+    mem_limit: ${DOCKER_REDIS_MEMORY}
+    cpus: ${DOCKER_REDIS_CPUS}
   web:
     build:
       context: .
       target: development
       args:
+        HTTP_PROXY: ${DOCKER_HTTP_PROXY:-}
+        http_proxy: ${DOCKER_HTTP_PROXY:-}
+        https_proxy: ${DOCKER_HTTPS_PROXY:-}
+        no_proxy: ${DOCKER_NO_PROXY:-}
+        HTTPS_PROXY: ${DOCKER_HTTPS_PROXY:-}
+        NO_PROXY: ${DOCKER_NO_PROXY:-}
+        DOCKER_LOG_DIRECTORY: ${DOCKER_LOG_DIRECTORY}
         NODE_IMAGE: ${NODE_IMAGE:?Set NODE_IMAGE in .env}
         APP_PORT: ${APP_PORT:?Set APP_PORT in .env}
         DOCKER_HOSTNAME: ${DOCKER_HOSTNAME:?Set DOCKER_HOSTNAME in .env}
@@ -18,9 +55,30 @@ services:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:?Set NEXT_PUBLIC_API_URL in .env}
         HEALTHCHECK_HOST: ${HEALTHCHECK_HOST:?Set HEALTHCHECK_HOST in .env}
         HEALTHCHECK_TIMEOUT_MS: ${HEALTHCHECK_TIMEOUT_MS:?Set HEALTHCHECK_TIMEOUT_MS in .env}
+    depends_on:
+      redis:
+        condition: service_healthy
+    extra_hosts:
+      - host.docker.internal:host-gateway
     ports:
       - '${DOCKER_BIND_HOST}:${APP_PORT}:${APP_PORT}'
     environment:
+      LOG_LEVEL: ${LOG_LEVEL}
+      LOG_DIRECTORY: ${DOCKER_LOG_DIRECTORY}
+      LOG_FILE_ENABLED: ${LOG_FILE_ENABLED}
+      LOG_MAX_SIZE: ${LOG_MAX_SIZE}
+      LOG_MAX_FILES: ${LOG_MAX_FILES}
+      REDIS_HOST: ${DOCKER_REDIS_HOST}
+      REDIS_PORT: ${REDIS_INTERNAL_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_DATABASE: ${REDIS_DATABASE}
+      REDIS_KEY_PREFIX: ${REDIS_KEY_PREFIX}
+      REDIS_TLS: ${REDIS_TLS}
+      REDIS_CONNECT_TIMEOUT_MS: ${REDIS_CONNECT_TIMEOUT_MS}
+      REDIS_COMMAND_TIMEOUT_MS: ${REDIS_COMMAND_TIMEOUT_MS}
+      REDIS_CACHE_TTL_SECONDS: ${REDIS_CACHE_TTL_SECONDS}
+      API_INTERNAL_URL: ${DOCKER_API_INTERNAL_URL}
+      NODE_OPTIONS: ${DEV_NODE_OPTIONS}
       APP_HOST: ${DOCKER_HOSTNAME}
       APP_PORT: ${APP_PORT}
       NODE_ENV: ${DEV_NODE_ENV}
@@ -30,7 +88,8 @@ services:
       PORT: ${APP_PORT}
     volumes:
       - ./.env:/app/.env:ro
-      - next-cache:/app/.next
+      - dev-next-cache:/app/.next
+      - web-logs:${DOCKER_LOG_DIRECTORY}
     develop:
       watch:
         - action: sync
@@ -67,6 +126,8 @@ services:
           path: ./.npmrc
         - action: rebuild
           path: ./Dockerfile
+    mem_limit: ${DOCKER_DEV_MEMORY}
+    cpus: ${DOCKER_DEV_CPUS}
     init: true
     healthcheck:
       test: ['CMD', 'node', 'scripts/healthcheck.ts']
@@ -76,4 +137,5 @@ services:
       retries: ${DOCKER_HEALTH_RETRIES:?Set DOCKER_HEALTH_RETRIES in .env}
 
 volumes:
-  next-cache:
+  web-logs:
+  dev-next-cache:

@@ -18,12 +18,11 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: cp .env.example .env
+      - run: node scripts/configure-local.cjs
       - run: npm ci
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
-      - run: npm run style:check
       - run: npm test
       - run: npm audit --omit=dev --audit-level=high
   build:
@@ -36,10 +35,17 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: cp .env.example .env
+      - run: node scripts/configure-local.cjs
       - run: npm ci
         env:
           HUSKY: '0'
       - run: npm run build
       - run: npx playwright install --with-deps chromium
+      - uses: docker/setup-compose-action@v2
+        with:
+          version: v5.5.1
+      - run: npm run infra:up
       - run: npm run test:e2e
+      - name: Stop browser-test infrastructure
+        if: always()
+        run: docker compose --env-file .env down

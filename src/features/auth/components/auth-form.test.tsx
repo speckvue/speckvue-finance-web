@@ -1,27 +1,7 @@
-/**
- * @fileoverview Tests authentication form validation and submission feedback.
- *
- * Verifies invalid input handling and the scaffold form behavior.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { render, screen } from '@testing-library/react';
-
-import userEvent from '@testing-library/user-event';
-
-import { expect, it } from 'vitest';
-
 import AuthForm from '@/features/auth/components/auth-form';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { expect, it } from 'vitest';
 
 it('shows field errors without pretending to authenticate', async () => {
   render(<AuthForm mode="sign-up" />);
@@ -35,5 +15,3 @@ it('shows field errors without pretending to authenticate', async () => {
   expect(screen.getByText('Use at least 12 characters.')).toBeVisible();
   expect(screen.queryByRole('status')).not.toBeInTheDocument();
 });
-
-// ---------------------------------------------------------------------------

@@ -1,10 +1,9 @@
 'use client';
 
-import * as React from 'react';
-import * as TabsPrimitive from '@radix-ui/react-tabs';
-
 import { cn } from '@/utils/cn';
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import * as React from 'react';
 
 const TabMenuVerticalContent = TabsPrimitive.Content;
 TabMenuVerticalContent.displayName = 'TabMenuVerticalContent';
@@ -112,10 +111,10 @@ function TabMenuVerticalArrowIcon<T extends React.ElementType>({
 TabMenuVerticalArrowIcon.displayName = 'TabMenuVerticalArrowIcon';
 
 export {
-  TabMenuVerticalRoot as Root,
-  TabMenuVerticalList as List,
-  TabMenuVerticalTrigger as Trigger,
-  TabMenuVerticalIcon as Icon,
   TabMenuVerticalArrowIcon as ArrowIcon,
   TabMenuVerticalContent as Content,
+  TabMenuVerticalIcon as Icon,
+  TabMenuVerticalList as List,
+  TabMenuVerticalRoot as Root,
+  TabMenuVerticalTrigger as Trigger,
 };

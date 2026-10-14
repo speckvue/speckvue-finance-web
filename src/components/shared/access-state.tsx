@@ -1,23 +1,5 @@
-/**
- * @fileoverview Displays loading, unauthorized, and forbidden access states.
- *
- * Explains access outcomes and offers sign-in when a session is required.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import Link from 'next/link';
-
 import * as Button from '@/components/ui/button';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import Link from 'next/link';
 
 const AccessState = ({
   status,
@@ -41,10 +23,4 @@ const AccessState = ({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default AccessState;
-
-// ---------------------------------------------------------------------------

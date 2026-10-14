@@ -1,34 +1,9 @@
-/**
- * @fileoverview Exercises dashboard, authentication, appearance, and readiness flows in browsers.
- *
- * Verifies desktop and mobile behavior plus production access protection.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { expect, test } from '@playwright/test';
-
 import { spawnSync } from 'node:child_process';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const protectedURL = `http://${process.env.APP_HOST}:${process.env.APP_PROTECTION_PORT}`;
 
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
-test('production protection and security headers fail closed', async ({
-  request,
-  page,
-}) => {
+test('Redis readiness and container probe', async ({ request }) => {
   const health = await request.get('/api/health');
   expect(health.status()).toBe(200);
   expect(await health.json()).toEqual({ status: 'ok' });
@@ -37,6 +12,12 @@ test('production protection and security headers fail closed', async ({
     encoding: 'utf8',
   });
   expect(probe.status, probe.stderr).toBe(0);
+});
+
+test('production protection and security headers fail closed', async ({
+  request,
+  page,
+}) => {
   const response = await request.get(protectedURL + '/dashboard', {
     maxRedirects: 0,
   });
@@ -116,5 +97,3 @@ test('auth validation and legal placeholders are explicit', async ({
     page.getByText('Draft placeholder · Not an approved policy'),
   ).toBeVisible();
 });
-
-// ---------------------------------------------------------------------------

@@ -1,48 +1,22 @@
-/**
- * @fileoverview Renders the theme preference control using next-themes.
- *
- * Offers explicit Light, Dark, and System choices and preserves the selection.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import subscribe from '@/lib/utils/noop-subscribe';
-
-import { useSyncExternalStore } from 'react';
-
-import { useTheme } from 'next-themes';
-
 import * as Button from '@/components/ui/button';
-
 import * as Dropdown from '@/components/ui/dropdown';
-
+import subscribe from '@/lib/utils/noop-subscribe';
 import {
+  RiCheckLine,
+  RiComputerLine,
   RiMoonLine,
   RiSunLine,
-  RiComputerLine,
-  RiCheckLine,
 } from '@remixicon/react';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import { useTheme } from 'next-themes';
+import { useSyncExternalStore } from 'react';
 
 const preferences = [
   { value: 'light', label: 'Light', icon: RiSunLine },
   { value: 'dark', label: 'Dark', icon: RiMoonLine },
   { value: 'system', label: 'System', icon: RiComputerLine },
 ] as const;
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const ThemeSwitcher = () => {
   const mounted = useSyncExternalStore(
@@ -106,10 +80,4 @@ const ThemeSwitcher = () => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default ThemeSwitcher;
-
-// ---------------------------------------------------------------------------

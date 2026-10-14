@@ -1,29 +1,9 @@
-/**
- * @fileoverview Composes query caching, next-themes, and application notifications.
- *
- * Makes shared client services available beneath the root layout.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { useState } from 'react';
-
-import { QueryClientProvider } from '@tanstack/react-query';
-
-import { ThemeProvider } from 'next-themes';
-
 import createQueryClient from '@/lib/query/client';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from 'next-themes';
+import { useState } from 'react';
 
 const AppProviders = ({
   children,
@@ -46,10 +26,4 @@ const AppProviders = ({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default AppProviders;
-
-// ---------------------------------------------------------------------------

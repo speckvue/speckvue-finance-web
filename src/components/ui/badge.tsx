@@ -2,12 +2,11 @@
 
 // AlignUI Badge v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const BADGE_ROOT_NAME = 'BadgeRoot';
 const BADGE_ICON_NAME = 'BadgeIcon';
@@ -489,4 +488,4 @@ function BadgeDot({ size, variant, color, className, ...rest }: BadgeDotProps) {
 }
 BadgeDot.displayName = BADGE_DOT_NAME;
 
-export { BadgeRoot as Root, BadgeIcon as Icon, BadgeDot as Dot };
+export { BadgeDot as Dot, BadgeIcon as Icon, BadgeRoot as Root };

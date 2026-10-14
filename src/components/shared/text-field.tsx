@@ -1,27 +1,8 @@
-/**
- * @fileoverview Composes an AlignUI input with the shared field wrapper.
- *
- * Provides consistent text entry, labeling, and validation feedback.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import * as Input from '@/components/ui/input';
-
-import FormField from './form-field';
-
 import type { Props } from './form-field';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import FormField from './form-field';
 
 const TextField = ({
   id,
@@ -49,10 +30,4 @@ const TextField = ({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default TextField;
-
-// ---------------------------------------------------------------------------

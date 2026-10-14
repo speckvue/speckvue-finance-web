@@ -1,9 +1,8 @@
 'use client';
 
-import * as React from 'react';
-import * as SliderPrimitive from '@radix-ui/react-slider';
-
 import { cn } from '@/utils/cn';
+import * as SliderPrimitive from '@radix-ui/react-slider';
+import * as React from 'react';
 
 const SLIDER_ROOT_NAME = 'SliderRoot';
 const SLIDER_THUMB_NAME = 'SliderThumb';

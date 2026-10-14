@@ -1,31 +1,9 @@
-/**
- * @fileoverview Defines the root HTML document, metadata, fonts, and application providers.
- *
- * Applies shared rendering and theme setup to every route.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import type { Metadata } from 'next';
-
-import { headers } from 'next/headers';
-
-import '@/styles/fonts.css';
-
-import '@/styles/globals.css';
-
-import AppProviders from '@/lib/providers/app-providers';
-
 import publicEnv from '@/lib/config/public-env';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import AppProviders from '@/lib/providers/app-providers';
+import '@/styles/fonts.css';
+import '@/styles/globals.css';
+import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 
 const appDescription =
   'Web application for Speckvue Finance, providing an intuitive interface to manage personal finances, track expenses, monitor income, and organize budgets.';
@@ -45,10 +23,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const nonce = (await headers()).get('x-nonce') ?? undefined;
   return (
@@ -60,10 +34,4 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default RootLayout;
-
-// ---------------------------------------------------------------------------

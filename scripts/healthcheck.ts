@@ -1,21 +1,4 @@
-/**
- * @fileoverview Probes the configured readiness endpoint using the native Node HTTP client.
- *
- * Supplies a lightweight container health check without extra runtime dependencies.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { pathToFileURL } from 'node:url';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 // Read host, port and timeout from the injected central configuration.
 
@@ -36,10 +19,4 @@ const healthcheck = async () => {
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href)
   await healthcheck();
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default healthcheck;
-
-// ---------------------------------------------------------------------------

@@ -1,34 +1,17 @@
-/**
- * @fileoverview Assembles TanStack Table features and row models.
- *
- * Shares the sorting, filtering, pagination, visibility, and selection configuration.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import {
-  tableFeatures,
-  rowSortingFeature,
-  globalFilteringFeature,
   columnFilteringFeature,
-  rowPaginationFeature,
   columnVisibilityFeature,
-  rowSelectionFeature,
-  createSortedRowModel,
   createFilteredRowModel,
   createPaginatedRowModel,
+  createSortedRowModel,
   filterFns,
+  globalFilteringFeature,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
   sortFns,
+  tableFeatures,
 } from '@tanstack/react-table';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const dataTableFeatures = tableFeatures({
   rowSortingFeature,
@@ -44,10 +27,4 @@ const dataTableFeatures = tableFeatures({
   sortFns,
 });
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default dataTableFeatures;
-
-// ---------------------------------------------------------------------------

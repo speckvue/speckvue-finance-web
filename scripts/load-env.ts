@@ -1,31 +1,43 @@
-/**
- * @fileoverview Loads, expands, and validates centralized .env configuration.
- *
- * Shares typed ports, hosts, and runtime settings between native and Docker commands.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { config } from 'dotenv';
-
 import { expand } from 'dotenv-expand';
-
 import { z } from 'zod';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const port = z.coerce.number().int().min(1).max(65535);
 
 const duration = z.string().regex(/^\d+(ms|s|m|h)$/);
 
 const environmentSchema = z.object({
+  DOCKER_LOG_DIRECTORY: z.string().regex(/^\/app\/[a-zA-Z0-9_/-]+$/),
+  DOCKER_HTTP_PROXY: z.string().default(''),
+  DOCKER_HTTPS_PROXY: z.string().default(''),
+  DOCKER_NO_PROXY: z.string().default(''),
+  LOG_LEVEL: z.enum([
+    'error',
+    'warn',
+    'info',
+    'http',
+    'verbose',
+    'debug',
+    'silly',
+    'silent',
+  ]),
+  LOG_DIRECTORY: z.string().min(1),
+  LOG_FILE_ENABLED: z.enum(['true', 'false']),
+  LOG_MAX_SIZE: z.string().regex(/^[1-9][0-9]*[kmg]$/i),
+  LOG_MAX_FILES: z.string().regex(/^[1-9][0-9]*d$/),
+  REDIS_HOST: z.string().min(1),
+  REDIS_PORT: port,
+  REDIS_PASSWORD: z
+    .string()
+    .min(16)
+    .refine((value) => !value.includes('replace_')),
+  REDIS_DATABASE: z.coerce.number().int().min(0).max(15),
+  REDIS_KEY_PREFIX: z.string().min(1),
+  REDIS_TLS: z.enum(['true', 'false']),
+  REDIS_CONNECT_TIMEOUT_MS: z.coerce.number().int().positive(),
+  REDIS_COMMAND_TIMEOUT_MS: z.coerce.number().int().positive(),
+  REDIS_CACHE_TTL_SECONDS: z.coerce.number().int().positive(),
+  API_INTERNAL_URL: z.url(),
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
   NEXT_PUBLIC_APP_URL: z.url(),
   NEXT_PUBLIC_API_URL: z.url(),
@@ -62,10 +74,6 @@ const environmentSchema = z.object({
   DOCKER_NEXT_CACHE_SIZE: z.string().regex(/^\d+[kmg]$/),
 });
 
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 const loadEnv = () => {
   const result = config({ path: '.env', quiet: true });
   if (result.error)
@@ -76,10 +84,4 @@ const loadEnv = () => {
   return environmentSchema.parse(process.env);
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default loadEnv;
-
-// ---------------------------------------------------------------------------

@@ -1,25 +1,6 @@
-/**
- * @fileoverview Sends credentialed API requests with timeouts and response schema validation.
- *
- * Enforces the configured API origin and a predictable error contract.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import ApiError from './api-error';
-
 import publicEnv from '@/lib/config/public-env';
-
 import type { z } from 'zod';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import ApiError from './api-error';
 
 type RequestOptions<T> = Omit<RequestInit, 'body'> & {
   schema: z.ZodType<T>;
@@ -27,10 +8,6 @@ type RequestOptions<T> = Omit<RequestInit, 'body'> & {
   timeoutMs?: number;
   csrfToken?: string;
 };
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const apiRequest = async <T>(
   path: string,
@@ -87,10 +64,4 @@ const apiRequest = async <T>(
   }
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default apiRequest;
-
-// ---------------------------------------------------------------------------

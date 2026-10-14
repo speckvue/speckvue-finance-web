@@ -1,23 +1,5 @@
-/**
- * @fileoverview Configures standalone output and shared Next.js security settings.
- *
- * Supports container packaging and consistent HTTP behavior.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import type { NextConfig } from 'next';
-
 import publicEnv from './src/lib/config/public-env';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -56,10 +38,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default nextConfig;
-
-// ---------------------------------------------------------------------------

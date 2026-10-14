@@ -2,10 +2,9 @@
 
 // AlignUI Table v0.0.0
 
-import * as React from 'react';
-
 import * as Divider from '@/components/ui/divider';
 import { cn } from '@/utils/cn';
+import * as React from 'react';
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -128,12 +127,12 @@ const TableCaption = React.forwardRef<
 TableCaption.displayName = 'TableCaption';
 
 export {
-  Table as Root,
-  TableHeader as Header,
   TableBody as Body,
+  TableCaption as Caption,
+  TableCell as Cell,
   TableHead as Head,
+  TableHeader as Header,
+  Table as Root,
   TableRow as Row,
   TableRowDivider as RowDivider,
-  TableCell as Cell,
-  TableCaption as Caption,
 };

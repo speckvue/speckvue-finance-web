@@ -2,12 +2,11 @@
 
 // AlignUI LinkButton v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const LINK_BUTTON_ROOT_NAME = 'LinkButtonRoot';
 const LINK_BUTTON_ICON_NAME = 'LinkButtonIcon';
@@ -137,4 +136,4 @@ function LinkButtonIcon<T extends React.ElementType>({
 }
 LinkButtonIcon.displayName = LINK_BUTTON_ICON_NAME;
 
-export { LinkButtonRoot as Root, LinkButtonIcon as Icon };
+export { LinkButtonIcon as Icon, LinkButtonRoot as Root };

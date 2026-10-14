@@ -1,16 +1,3 @@
-/**
- * @fileoverview Validates redirect destinations against local application paths.
- *
- * Prevents external or malformed URLs from becoming navigation targets.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 const safeRedirect = (value: unknown, fallback = '/dashboard'): string => {
   if (
     typeof value !== 'string' ||
@@ -33,10 +20,4 @@ const safeRedirect = (value: unknown, fallback = '/dashboard'): string => {
   }
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default safeRedirect;
-
-// ---------------------------------------------------------------------------

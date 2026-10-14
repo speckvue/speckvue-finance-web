@@ -1,23 +1,5 @@
-/**
- * @fileoverview Creates a QueryClient with cache lifetimes and selective retry behavior.
- *
- * Centralizes query defaults while avoiding retries for permanent API failures.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { QueryClient } from '@tanstack/react-query';
-
 import ApiError from '@/lib/api/api-error';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { QueryClient } from '@tanstack/react-query';
 
 const createQueryClient = () => {
   return new QueryClient({
@@ -38,10 +20,4 @@ const createQueryClient = () => {
   });
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default createQueryClient;
-
-// ---------------------------------------------------------------------------

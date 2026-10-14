@@ -2,11 +2,10 @@
 
 // AlignUI Hint v0.0.0
 
-import * as React from 'react';
-
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import * as React from 'react';
 
 const HINT_ROOT_NAME = 'HintRoot';
 const HINT_ICON_NAME = 'HintIcon';
@@ -81,4 +80,4 @@ function HintIcon<T extends React.ElementType>({
 }
 HintIcon.displayName = HINT_ICON_NAME;
 
-export { HintRoot as Root, HintIcon as Icon };
+export { HintIcon as Icon, HintRoot as Root };

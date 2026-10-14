@@ -2,12 +2,11 @@
 
 // AlignUI FancyButton v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const FANCY_BUTTON_ROOT_NAME = 'FancyButtonRoot';
 const FANCY_BUTTON_ICON_NAME = 'FancyButtonIcon';
@@ -140,4 +139,4 @@ function FancyButtonIcon<T extends React.ElementType>({
 }
 FancyButtonIcon.displayName = FANCY_BUTTON_ICON_NAME;
 
-export { FancyButtonRoot as Root, FancyButtonIcon as Icon };
+export { FancyButtonIcon as Icon, FancyButtonRoot as Root };

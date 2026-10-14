@@ -1,25 +1,6 @@
-/**
- * @fileoverview Prompts for a Conventional Commit message and invokes git commit.
- *
- * Helps contributors create structured commits without automatically staging changes.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { createInterface } from 'node:readline/promises';
-
-import { stdin, stdout } from 'node:process';
-
 import { spawnSync } from 'node:child_process';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { stdin, stdout } from 'node:process';
+import { createInterface } from 'node:readline/promises';
 
 const commit = async () => {
   if (process.argv.includes('--help')) {
@@ -62,10 +43,4 @@ const commit = async () => {
 
 await commit();
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default commit;
-
-// ---------------------------------------------------------------------------

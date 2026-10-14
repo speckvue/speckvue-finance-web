@@ -1,27 +1,7 @@
-/**
- * @fileoverview Tests table filtering and recovery from an empty result set.
- *
- * Verifies that users can find rows and restore the table after a search.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { render, screen } from '@testing-library/react';
-
-import userEvent from '@testing-library/user-event';
-
-import { expect, it } from 'vitest';
-
 import DataTable from '@/components/shared/data-table';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { expect, it } from 'vitest';
 
 it('filters rows and offers recovery from an empty search', async () => {
   render(
@@ -45,5 +25,3 @@ it('filters rows and offers recovery from an empty search', async () => {
   expect(screen.getByText('Salary')).toBeVisible();
   expect(screen.getByText('Rent')).toBeVisible();
 });
-
-// ---------------------------------------------------------------------------

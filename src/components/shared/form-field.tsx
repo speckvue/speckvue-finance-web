@@ -1,25 +1,7 @@
-/**
- * @fileoverview Composes a field label, help text, and validation feedback.
- *
- * Connects reusable form controls to accessible descriptions and errors.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import * as Label from '@/components/ui/label';
-
 import * as Hint from '@/components/ui/hint';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import * as Label from '@/components/ui/label';
 
 export type Props = {
   id: string;
@@ -28,10 +10,6 @@ export type Props = {
   children: React.ReactNode;
   hint?: string;
 };
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const FormField = ({ id, label, errors = [], children, hint }: Props) => {
   return (
@@ -54,10 +32,4 @@ const FormField = ({ id, label, errors = [], children, hint }: Props) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default FormField;
-
-// ---------------------------------------------------------------------------

@@ -25,3 +25,5 @@ Desktop.ini
 !.vscode/settings.json
 !.vscode/extensions.json
 release-artifacts/
+
+logs/

@@ -2,12 +2,11 @@
 
 // AlignUI Alert v0.0.0
 
-import * as React from 'react';
-import { RiCloseLine } from '@remixicon/react';
-
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type ClassValue, type VariantProps } from '@/utils/tv';
+import { RiCloseLine } from '@remixicon/react';
+import * as React from 'react';
 
 const ALERT_ROOT_NAME = 'AlertRoot';
 const ALERT_ICON_NAME = 'AlertIcon';
@@ -297,4 +296,4 @@ function AlertCloseIcon<T extends React.ElementType>({
 }
 AlertCloseIcon.displayName = ALERT_CLOSE_ICON_NAME;
 
-export { AlertRoot as Root, AlertIcon as Icon, AlertCloseIcon as CloseIcon };
+export { AlertCloseIcon as CloseIcon, AlertIcon as Icon, AlertRoot as Root };

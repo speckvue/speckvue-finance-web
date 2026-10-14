@@ -1,23 +1,5 @@
-/**
- * @fileoverview Tests account email and password validation rules.
- *
- * Verifies accepted input and rejection of invalid credentials.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { expect, it } from 'vitest';
-
 import signUpSchema from '@/lib/validations/auth';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { expect, it } from 'vitest';
 
 it('rejects malformed emails and weak registration passwords', () => {
   expect(
@@ -30,5 +12,3 @@ it('rejects malformed emails and weak registration passwords', () => {
     }).success,
   ).toBe(true);
 });
-
-// ---------------------------------------------------------------------------

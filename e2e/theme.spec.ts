@@ -1,21 +1,4 @@
-/**
- * @fileoverview Tests explicit theme selection, persistence, and system appearance.
- *
- * Verifies that Light and Dark visibly change the page and System follows device preferences.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { expect, test } from '@playwright/test';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 for (const system of ['light', 'dark'] as const) {
   test(`appearance selection works with a ${system} system theme`, async ({
@@ -66,5 +49,3 @@ for (const system of ['light', 'dark'] as const) {
     );
   });
 }
-
-// ---------------------------------------------------------------------------

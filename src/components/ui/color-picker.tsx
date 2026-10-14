@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/utils/cn';
 import * as React from 'react';
 import {
   ColorArea as AriaColorArea,
@@ -22,8 +23,6 @@ import {
   composeRenderProps,
   parseColor,
 } from 'react-aria-components';
-
-import { cn } from '@/utils/cn';
 
 const ColorField = AriaColorField;
 const ColorPicker = AriaColorPicker;
@@ -165,14 +164,14 @@ const EyeDropperButton = React.forwardRef<
 EyeDropperButton.displayName = 'EyeDropperButton';
 
 export {
-  ColorPicker as Root,
-  ColorField as Field,
   ColorArea as Area,
+  EyeDropperButton,
+  ColorField as Field,
+  ColorPicker as Root,
   ColorSlider as Slider,
   SliderTrack,
-  ColorThumb as Thumb,
+  ColorSwatch as Swatch,
   ColorSwatchPicker as SwatchPicker,
   ColorSwatchPickerItem as SwatchPickerItem,
-  ColorSwatch as Swatch,
-  EyeDropperButton,
+  ColorThumb as Thumb,
 };

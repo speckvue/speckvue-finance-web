@@ -1,31 +1,8 @@
-/**
- * @fileoverview Launches Next.js development, build, or production commands from .env.
- *
- * Applies configured hosts, ports, and runtime modes before Next.js starts.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { createRequire } from 'node:module';
-
 import { spawn } from 'node:child_process';
-
+import { createRequire } from 'node:module';
 import loadEnv from './load-env';
 
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
-
 const require = createRequire(import.meta.url);
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const runApp = ({ mode }: { mode: string }) => {
   if (!['dev', 'build', 'start'].includes(mode))
@@ -56,10 +33,4 @@ const runApp = ({ mode }: { mode: string }) => {
 
 runApp({ mode: process.argv[2] ?? '' });
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default runApp;
-
-// ---------------------------------------------------------------------------

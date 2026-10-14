@@ -2,11 +2,10 @@
 
 // AlignUI FileUpload v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { cn } from '@/utils/cn';
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const FileUpload = React.forwardRef<
   HTMLLabelElement,
@@ -70,7 +69,7 @@ function FileUploadIcon<T extends React.ElementType>({
 }
 
 export {
-  FileUpload as Root,
   FileUploadButton as Button,
   FileUploadIcon as Icon,
+  FileUpload as Root,
 };

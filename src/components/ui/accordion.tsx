@@ -2,12 +2,11 @@
 
 // AlignUI Accordion v0.0.0
 
-import * as React from 'react';
-import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { RiAddLine, RiSubtractLine } from '@remixicon/react';
-
 import { cn } from '@/utils/cn';
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { RiAddLine, RiSubtractLine } from '@remixicon/react';
+import * as React from 'react';
 
 const ACCORDION_ITEM_NAME = 'AccordionItem';
 const ACCORDION_ICON_NAME = 'AccordionIcon';
@@ -145,11 +144,11 @@ const AccordionContent = React.forwardRef<
 AccordionContent.displayName = ACCORDION_CONTENT_NAME;
 
 export {
-  AccordionRoot as Root,
-  AccordionHeader as Header,
-  AccordionItem as Item,
-  AccordionTrigger as Trigger,
-  AccordionIcon as Icon,
   AccordionArrow as Arrow,
   AccordionContent as Content,
+  AccordionHeader as Header,
+  AccordionIcon as Icon,
+  AccordionItem as Item,
+  AccordionRoot as Root,
+  AccordionTrigger as Trigger,
 };

@@ -1,42 +1,18 @@
-/**
- * @fileoverview Renders the responsive application shell and mobile navigation drawer.
- *
- * Provides a consistent workspace around protected page content.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import Navigation from './navigation';
-
-import Link from 'next/link';
-
 import Brand from '@/components/shared/brand';
-
 import ThemeSwitcher from '@/components/shared/theme-switcher';
-
-import useShellStore from '@/stores/shell-store';
-
 import * as Button from '@/components/ui/button';
-
 import * as Drawer from '@/components/ui/drawer';
-
+import useShellStore from '@/stores/shell-store';
 import {
-  RiMenuLine,
   RiArrowRightUpLine,
-  RiShieldCheckLine,
   RiCloseLine,
+  RiMenuLine,
+  RiShieldCheckLine,
 } from '@remixicon/react';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import Link from 'next/link';
+import Navigation from './navigation';
 
 const AppShell = ({ children }: { children: React.ReactNode }) => {
   const menuOpen = useShellStore((s) => s.menuOpen);
@@ -143,10 +119,4 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default AppShell;
-
-// ---------------------------------------------------------------------------

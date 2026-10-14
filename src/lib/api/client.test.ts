@@ -1,25 +1,6 @@
-/**
- * @fileoverview Tests API response validation, request handling, and failure mapping.
- *
- * Verifies the client contract with isolated fetch fixtures.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { afterEach, expect, it, vi } from 'vitest';
-
-import { z } from 'zod';
-
 import apiRequest from '@/lib/api/client';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { afterEach, expect, it, vi } from 'vitest';
+import { z } from 'zod';
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -75,5 +56,3 @@ it('rejects requests that escape the configured origin', async () => {
   ).rejects.toThrow();
   expect(fetchMock).not.toHaveBeenCalled();
 });
-
-// ---------------------------------------------------------------------------

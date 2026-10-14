@@ -1,23 +1,6 @@
-/**
- * @fileoverview Renders shared loading, empty, error, and success feedback.
- *
- * Keeps status messages and recovery actions consistent across features.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import * as Button from '@/components/ui/button';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const Feedback = ({
   title,
@@ -46,10 +29,4 @@ const Feedback = ({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default Feedback;
-
-// ---------------------------------------------------------------------------

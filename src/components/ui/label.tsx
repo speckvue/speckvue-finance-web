@@ -2,10 +2,9 @@
 
 // AlignUI Label v0.0.0
 
-import * as React from 'react';
-import * as LabelPrimitives from '@radix-ui/react-label';
-
 import { cn } from '@/utils/cn';
+import * as LabelPrimitives from '@radix-ui/react-label';
+import * as React from 'react';
 
 const LabelRoot = React.forwardRef<
   React.ComponentRef<typeof LabelPrimitives.Root>,
@@ -70,4 +69,4 @@ function LabelSub({
   );
 }
 
-export { LabelRoot as Root, LabelAsterisk as Asterisk, LabelSub as Sub };
+export { LabelAsterisk as Asterisk, LabelRoot as Root, LabelSub as Sub };

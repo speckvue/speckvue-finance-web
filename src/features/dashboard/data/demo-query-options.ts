@@ -1,29 +1,9 @@
-/**
- * @fileoverview Defines query options that validate and return sample transactions.
- *
- * Shares the demo query contract between query consumers.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { queryOptions } from '@tanstack/react-query';
-
+import mockTransactions, {
+  transactionSchema,
+} from '@/features/dashboard/data/transactions';
 import queryKeys from '@/lib/query/keys';
-
-import { transactionSchema } from '@/features/dashboard/data/transactions';
-
-import mockTransactions from '@/features/dashboard/data/transactions';
-
+import { queryOptions } from '@tanstack/react-query';
 import { z } from 'zod';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 export const demoTransactionsOptions = queryOptions({
   queryKey: queryKeys.demo.transactions(),
@@ -33,10 +13,4 @@ export const demoTransactionsOptions = queryOptions({
   },
 });
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default demoTransactionsOptions;
-
-// ---------------------------------------------------------------------------

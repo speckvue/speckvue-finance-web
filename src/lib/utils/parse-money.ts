@@ -1,23 +1,5 @@
-/**
- * @fileoverview Parses decimal currency input into integer minor units.
- *
- * Rejects invalid precision and avoids floating-point monetary parsing.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import type { Money } from '@/types/money';
-
 import currencyDigits from './currency-digits';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const parseMoney = (value: string, currency: string): Money => {
   const digits = currencyDigits(currency);
@@ -33,10 +15,4 @@ const parseMoney = (value: string, currency: string): Money => {
   return { minorUnits: negative ? -minorUnits : minorUnits, currency };
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default parseMoney;
-
-// ---------------------------------------------------------------------------

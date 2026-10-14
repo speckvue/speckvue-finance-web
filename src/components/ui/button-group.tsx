@@ -2,12 +2,11 @@
 
 // AlignUI ButtonGroup v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const BUTTON_GROUP_ROOT_NAME = 'ButtonGroupRoot';
 const BUTTON_GROUP_ITEM_NAME = 'ButtonGroupItem';
@@ -155,7 +154,7 @@ function ButtonGroupIcon<T extends React.ElementType>({
 ButtonGroupIcon.displayName = BUTTON_GROUP_ICON_NAME;
 
 export {
-  ButtonGroupRoot as Root,
-  ButtonGroupItem as Item,
   ButtonGroupIcon as Icon,
+  ButtonGroupItem as Item,
+  ButtonGroupRoot as Root,
 };

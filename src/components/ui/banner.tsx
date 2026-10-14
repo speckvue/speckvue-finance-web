@@ -2,12 +2,11 @@
 
 // AlignUI Banner v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const BANNER_ROOT_NAME = 'BannerRoot';
 const BANNER_CONTENT_NAME = 'BannerContent';
@@ -321,8 +320,8 @@ const BannerCloseButton = React.forwardRef<
 BannerCloseButton.displayName = BANNER_CLOSE_BUTTON_NAME;
 
 export {
-  Banner as Root,
+  BannerCloseButton as CloseButton,
   BannerContent as Content,
   BannerIcon as Icon,
-  BannerCloseButton as CloseButton,
+  Banner as Root,
 };

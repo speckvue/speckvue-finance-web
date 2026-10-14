@@ -1,41 +1,14 @@
-/**
- * @fileoverview Configures browser projects and demo and protected standalone servers.
- *
- * Verifies production behavior at desktop and mobile sizes using configured ports.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { defineConfig, devices } from '@playwright/test';
-
 import loadEnv from './scripts/load-env.ts';
-
 import prepareStandalone from './scripts/prepare-standalone.ts';
 
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 prepareStandalone();
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const env = loadEnv();
 
 const baseURL = `http://${env.APP_HOST}:${env.APP_PORT}`;
 
 const protectedURL = `http://${env.APP_HOST}:${env.APP_PROTECTION_PORT}`;
-
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
 
 export default defineConfig({
   testDir: './e2e',
@@ -74,5 +47,3 @@ export default defineConfig({
     },
   ],
 });
-
-// ---------------------------------------------------------------------------

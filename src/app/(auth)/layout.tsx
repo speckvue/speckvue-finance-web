@@ -1,23 +1,5 @@
-/**
- * @fileoverview Provides the shared layout for authentication pages.
- *
- * Keeps account entry and recovery screens visually consistent.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import Brand from '@/components/shared/brand';
-
 import ThemeSwitcher from '@/components/shared/theme-switcher';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -52,10 +34,4 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default AuthLayout;
-
-// ---------------------------------------------------------------------------

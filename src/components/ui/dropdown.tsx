@@ -2,12 +2,11 @@
 
 // AlignUI Dropdown v0.0.0
 
-import * as React from 'react';
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { RiArrowRightSLine } from '@remixicon/react';
-
 import { cn } from '@/utils/cn';
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { RiArrowRightSLine } from '@remixicon/react';
+import * as React from 'react';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -172,20 +171,20 @@ const DropdownMenuSubContent = React.forwardRef<
 DropdownMenuSubContent.displayName = 'DropdownMenuSubContent';
 
 export {
-  DropdownMenu as Root,
-  DropdownMenuPortal as Portal,
-  DropdownMenuTrigger as Trigger,
+  DropdownMenuArrow as Arrow,
+  DropdownMenuCheckboxItem as CheckboxItem,
   DropdownMenuContent as Content,
+  DropdownMenuGroup as Group,
   DropdownMenuItem as Item,
   DropdownItemIcon as ItemIcon,
-  DropdownMenuGroup as Group,
   DropdownMenuLabel as Label,
   DropdownMenuSub as MenuSub,
-  DropdownMenuSubTrigger as MenuSubTrigger,
   DropdownMenuSubContent as MenuSubContent,
-  DropdownMenuCheckboxItem as CheckboxItem,
+  DropdownMenuSubTrigger as MenuSubTrigger,
+  DropdownMenuPortal as Portal,
   DropdownMenuRadioGroup as RadioGroup,
   DropdownMenuRadioItem as RadioItem,
+  DropdownMenu as Root,
   DropdownMenuSeparator as Separator,
-  DropdownMenuArrow as Arrow,
+  DropdownMenuTrigger as Trigger,
 };

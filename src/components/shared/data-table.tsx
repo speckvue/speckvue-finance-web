@@ -1,56 +1,26 @@
-/**
- * @fileoverview Renders a configurable table with filtering, sorting, pagination, and virtualization.
- *
- * Provides reusable transaction browsing with accessible recovery states.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { useRef, useState } from 'react';
-
+import Feedback from '@/components/shared/feedback';
+import * as Button from '@/components/ui/button';
+import * as Checkbox from '@/components/ui/checkbox';
+import * as Dropdown from '@/components/ui/dropdown';
+import * as Input from '@/components/ui/input';
+import * as Table from '@/components/ui/table';
+import dataTableFeatures from '@/lib/constants/table-features';
+import {
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+  RiSearchLine,
+  RiSettings3Line,
+} from '@remixicon/react';
 import type {
   OnChangeFn,
   PaginationState,
   SortingState,
 } from '@tanstack/react-table';
-
-import { flexRender } from '@tanstack/react-table';
-
-import { useTable, type ColumnDef } from '@tanstack/react-table';
-
-import dataTableFeatures from '@/lib/constants/table-features';
-
+import { flexRender, useTable, type ColumnDef } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-
-import * as Table from '@/components/ui/table';
-
-import * as Input from '@/components/ui/input';
-
-import * as Button from '@/components/ui/button';
-
-import * as Checkbox from '@/components/ui/checkbox';
-
-import * as Dropdown from '@/components/ui/dropdown';
-
-import Feedback from '@/components/shared/feedback';
-
-import {
-  RiSearchLine,
-  RiArrowLeftSLine,
-  RiArrowRightSLine,
-  RiSettings3Line,
-} from '@remixicon/react';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import { useRef, useState } from 'react';
 
 type ServerOperations = {
   rowCount: number;
@@ -71,10 +41,6 @@ type Props<T extends object> = {
   server?: ServerOperations;
   virtualize?: boolean;
 };
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const DataTable = <T extends object>({
   data,
@@ -347,10 +313,4 @@ const DataTable = <T extends object>({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default DataTable;
-
-// ---------------------------------------------------------------------------

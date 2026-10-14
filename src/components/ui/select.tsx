@@ -2,15 +2,14 @@
 
 // AlignUI Select v0.0.0
 
-import * as React from 'react';
+import { cn } from '@/utils/cn';
+import type { PolymorphicComponentProps } from '@/utils/polymorphic';
+import { tv, type VariantProps } from '@/utils/tv';
 import * as ScrollAreaPrimitives from '@radix-ui/react-scroll-area';
 import * as SelectPrimitives from '@radix-ui/react-select';
 import { Slottable } from '@radix-ui/react-slot';
 import { RiArrowDownSLine, RiCheckLine } from '@remixicon/react';
-
-import { cn } from '@/utils/cn';
-import type { PolymorphicComponentProps } from '@/utils/polymorphic';
-import { tv, type VariantProps } from '@/utils/tv';
+import * as React from 'react';
 
 export const selectVariants = tv({
   slots: {
@@ -429,12 +428,12 @@ function SelectItemIcon<T extends React.ElementType>({
 }
 
 export {
-  SelectRoot as Root,
   SelectContent as Content,
   SelectGroup as Group,
   SelectGroupLabel as GroupLabel,
   SelectItem as Item,
   SelectItemIcon as ItemIcon,
+  SelectRoot as Root,
   SelectSeparator as Separator,
   SelectTrigger as Trigger,
   TriggerIcon,

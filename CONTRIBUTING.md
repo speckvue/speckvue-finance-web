@@ -2,7 +2,7 @@
 
 Install Node 24 LTS and npm, run npm ci, copy .env.example to .env.local, and use npm run dev or npm run docker:up. Use the versioned VS Code settings if helpful.
 
-Keep changes scoped to a feature, preserve AlignUI source conventions, and use strict TypeScript. First-party modules use documented guide headers and separated Imports, Types / Constants, Main implementation, and Exports sections. Leave a blank line after each section's divider and before the next section. Prefer one default-exported arrow function per focused module. Required Next.js exports, framework callbacks, data-only modules, tests, and vendor sources are documented exceptions; see docs/conventions.md.
+Keep changes focused, use strict TypeScript, and preserve vendor attribution. Both repositories use Prettier and framework ESLint rules. Write comments for intent and non-obvious behavior; avoid repetitive headers and divider blocks. See docs/conventions.md.
 
 Use next-themes for all theme state and persistence. Do not introduce another theme store. Use integer minor units for monetary calculations and validated contracts at API boundaries.
 

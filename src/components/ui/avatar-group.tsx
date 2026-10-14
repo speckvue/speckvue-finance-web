@@ -2,11 +2,9 @@
 
 // AlignUI AvatarGroup v0.0.0
 
-import * as React from 'react';
-
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
-
+import * as React from 'react';
 import { AVATAR_ROOT_NAME } from './avatar';
 
 const AVATAR_GROUP_ROOT_NAME = 'AvatarGroupRoot';
@@ -112,4 +110,4 @@ function AvatarGroupOverflow({
 }
 AvatarGroupOverflow.displayName = AVATAR_GROUP_OVERFLOW_NAME;
 
-export { AvatarGroupRoot as Root, AvatarGroupOverflow as Overflow };
+export { AvatarGroupOverflow as Overflow, AvatarGroupRoot as Root };

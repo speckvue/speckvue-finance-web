@@ -2,14 +2,13 @@
 
 // AlignUI HorizontalStepper v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { RiArrowRightSLine } from '@remixicon/react';
-
 import { cn } from '@/utils/cn';
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import { RiArrowRightSLine } from '@remixicon/react';
+import * as React from 'react';
 
 const HORIZONTAL_STEPPER_ROOT_NAME = 'HorizontalStepperRoot';
 const HORIZONTAL_STEPPER_SEPARATOR_NAME = 'HorizontalStepperSeparator';
@@ -159,8 +158,8 @@ HorizontalStepperItemIndicator.displayName =
   HORIZONTAL_STEPPER_ITEM_INDICATOR_NAME;
 
 export {
-  HorizontalStepperRoot as Root,
-  HorizontalStepperSeparatorIcon as SeparatorIcon,
   HorizontalStepperItem as Item,
   HorizontalStepperItemIndicator as ItemIndicator,
+  HorizontalStepperRoot as Root,
+  HorizontalStepperSeparatorIcon as SeparatorIcon,
 };

@@ -1,34 +1,13 @@
-/**
- * @fileoverview Renders sample finance metrics, charts, and transaction browsing.
- *
- * Demonstrates the dashboard experience before live financial data is connected.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import DemoNotice from '@/components/shared/demo-notice';
-
 import TransactionTable from '@/features/dashboard/components/transaction-table';
-
 import formatMoney from '@/lib/utils/money';
-
 import parseMoney from '@/lib/utils/parse-money';
-
 import {
-  RiWallet3Line,
   RiArrowLeftDownLine,
   RiArrowRightUpLine,
   RiBankLine,
+  RiWallet3Line,
 } from '@remixicon/react';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 const summaries = [
   {
@@ -56,10 +35,6 @@ const summaries = [
     icon: RiBankLine,
   },
 ];
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const Dashboard = () => {
   return (
@@ -124,10 +99,4 @@ const Dashboard = () => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default Dashboard;
-
-// ---------------------------------------------------------------------------

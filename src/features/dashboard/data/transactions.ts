@@ -1,21 +1,4 @@
-/**
- * @fileoverview Defines the transaction schema and sample transaction records.
- *
- * Supplies validated example data for dashboard development.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { z } from 'zod';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 export const transactionSchema = z.object({
   id: z.string(),
@@ -95,10 +78,4 @@ const mockTransactions: Transaction[] = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default mockTransactions;
-
-// ---------------------------------------------------------------------------

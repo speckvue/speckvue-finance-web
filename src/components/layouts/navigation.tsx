@@ -1,29 +1,9 @@
-/**
- * @fileoverview Renders application navigation links and their active states.
- *
- * Helps users identify and move between available application destinations.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import Link from 'next/link';
-
-import useShellStore from '@/stores/shell-store';
-
 import * as Button from '@/components/ui/button';
-
+import useShellStore from '@/stores/shell-store';
 import { RiDashboardLine } from '@remixicon/react';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import Link from 'next/link';
 
 const Navigation = () => {
   return (
@@ -53,10 +33,4 @@ const Navigation = () => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default Navigation;
-
-// ---------------------------------------------------------------------------

@@ -1,30 +1,11 @@
-/**
- * @fileoverview Runs Docker build, Compose Watch, readiness, and smoke-check commands from .env.
- *
- * Keeps container execution aligned with the central project configuration.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { spawnSync } from 'node:child_process';
-
-import { setTimeout } from 'node:timers/promises';
-
 import loadEnv from './load-env';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const docker = async ({ command }: { command: string }) => {
   const env = loadEnv();
   const buildVariables = [
     'NODE_IMAGE',
+    'DOCKER_LOG_DIRECTORY',
     'APP_PORT',
     'DOCKER_HOSTNAME',
     'DOCKER_UID',
@@ -45,33 +26,32 @@ const docker = async ({ command }: { command: string }) => {
       args = ['build', '--target', 'production', '-t', env.DOCKER_IMAGE];
       for (const key of buildVariables)
         args.push('--build-arg', `${key}=${env[key]}`);
+      args.push(
+        '--build-arg',
+        'HTTP_PROXY=' + env.DOCKER_HTTP_PROXY,
+        '--build-arg',
+        'HTTPS_PROXY=' + env.DOCKER_HTTPS_PROXY,
+        '--build-arg',
+        'NO_PROXY=' + env.DOCKER_NO_PROXY,
+      );
       args.push('.');
       break;
     case 'run':
       args = [
-        'run',
-        '--rm',
-        '--init',
-        '-p',
-        `${env.DOCKER_BIND_HOST}:${env.APP_PORT}:${env.APP_PORT}`,
-        '--env',
-        `ENABLE_DEMO_MODE=${env.ENABLE_DEMO_MODE}`,
-        '--health-interval',
-        env.DOCKER_HEALTH_INTERVAL,
-        '--health-timeout',
-        env.DOCKER_HEALTH_TIMEOUT,
-        '--health-start-period',
-        env.DOCKER_HEALTH_START_PERIOD,
-        '--health-retries',
-        String(env.DOCKER_HEALTH_RETRIES),
-        env.DOCKER_IMAGE,
+        'compose',
+        '--env-file',
+        '.env',
+        '-f',
+        'docker-compose.prod.yml',
+        'up',
+        '--no-build',
       ];
       break;
     case 'up':
-      args = ['compose', '--env-file', '.env', 'up', '--build', '--watch'];
+      args = ['compose', '--env-file', '.env', 'up', '-d', '--build', '--wait'];
       break;
     case 'watch':
-      args = ['compose', '--env-file', '.env', 'watch'];
+      args = ['compose', '--env-file', '.env', 'up', '--build', '--watch'];
       break;
     case 'prod':
       args = [
@@ -111,60 +91,33 @@ const docker = async ({ command }: { command: string }) => {
       args = ['compose', '--env-file', '.env', 'config', '--quiet'];
       break;
     case 'smoke': {
-      const started = spawnSync(
-        'docker',
-        [
-          'run',
-          '-d',
-          '--init',
-          '-p',
-          `${env.DOCKER_BIND_HOST}:${env.APP_PORT}:${env.APP_PORT}`,
-          env.DOCKER_IMAGE,
-        ],
-        { encoding: 'utf8', shell: false },
-      );
-      if (started.status !== 0)
-        throw new Error(started.stderr || 'Container could not start.');
-      const id = started.stdout.trim();
+      const compose = [
+        'compose',
+        '--env-file',
+        '.env',
+        '-f',
+        'docker-compose.prod.yml',
+      ];
       try {
-        const user = spawnSync(
-          'docker',
-          ['inspect', '--format', '{{.Config.User}}', id],
-          { encoding: 'utf8', shell: false },
-        );
-        if (user.stdout.trim() !== `${env.DOCKER_UID}:${env.DOCKER_GID}`)
-          throw new Error(
-            'Production container must run as the configured non-root user.',
-          );
-        for (
-          let attempt = 0;
-          attempt < env.DOCKER_HEALTH_RETRIES * 10;
-          attempt++
-        ) {
-          try {
-            const response = await fetch(
-              `http://${env.DOCKER_BIND_HOST}:${env.APP_PORT}/api/health`,
-              { signal: AbortSignal.timeout(env.HEALTHCHECK_TIMEOUT_MS) },
-            );
-            if (response.ok) {
-              process.stdout.write(
-                'Container readiness and non-root checks passed.\n',
-              );
-              return;
-            }
-          } catch {
-            /* Wait for readiness. */
-          }
-          await setTimeout(1000);
+        for (const step of [
+          ['up', '-d', '--no-build', '--wait'],
+          ['exec', '-T', 'web', 'node', 'scripts/healthcheck.ts'],
+        ]) {
+          const check = spawnSync('docker', [...compose, ...step], {
+            stdio: 'inherit',
+            shell: false,
+          });
+          if (check.status !== 0)
+            throw new Error('Production Compose smoke check failed.');
         }
-        throw new Error('Container did not become ready.');
+        process.stdout.write('Production Compose readiness passed.\n');
       } finally {
-        spawnSync('docker', ['logs', id], { stdio: 'inherit', shell: false });
-        spawnSync('docker', ['rm', '-f', id], {
+        spawnSync('docker', [...compose, 'down'], {
           stdio: 'inherit',
           shell: false,
         });
       }
+      return;
     }
     default:
       throw new Error(
@@ -177,10 +130,4 @@ const docker = async ({ command }: { command: string }) => {
 
 await docker({ command: process.argv[2] ?? '' });
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default docker;
-
-// ---------------------------------------------------------------------------

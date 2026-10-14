@@ -1,21 +1,4 @@
-/**
- * @fileoverview Copies static and public assets into the Next.js standalone output.
- *
- * Prepares the production server bundle for local browser verification.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import { cpSync, existsSync } from 'node:fs';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const prepareStandalone = () => {
   if (!existsSync('.next/standalone/server.js'))
@@ -25,10 +8,4 @@ const prepareStandalone = () => {
     cpSync('public', '.next/standalone/public', { recursive: true });
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default prepareStandalone;
-
-// ---------------------------------------------------------------------------

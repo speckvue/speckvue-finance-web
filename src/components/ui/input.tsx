@@ -2,12 +2,11 @@
 
 // AlignUI Input v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const INPUT_ROOT_NAME = 'InputRoot';
 const INPUT_WRAPPER_NAME = 'InputWrapper';
@@ -309,10 +308,10 @@ function InputInlineAffix({
 InputInlineAffix.displayName = INPUT_INLINE_AFFIX_NAME;
 
 export {
+  InputAffix as Affix,
+  InputIcon as Icon,
+  InputInlineAffix as InlineAffix,
+  Input,
   InputRoot as Root,
   InputWrapper as Wrapper,
-  Input,
-  InputIcon as Icon,
-  InputAffix as Affix,
-  InputInlineAffix as InlineAffix,
 };

@@ -2,9 +2,8 @@
 
 // AlignUI Textarea v0.0.0
 
-import * as React from 'react';
-
 import { cn } from '@/utils/cn';
+import * as React from 'react';
 
 const TEXTAREA_ROOT_NAME = 'TextareaRoot';
 const TEXTAREA_NAME = 'Textarea';
@@ -193,4 +192,4 @@ function CharCounter({
 }
 CharCounter.displayName = TEXTAREA_COUNTER_NAME;
 
-export { TextareaRoot as Root, CharCounter };
+export { CharCounter, TextareaRoot as Root };

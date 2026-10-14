@@ -2,12 +2,11 @@
 
 // AlignUI StatusBadge v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const STATUS_BADGE_ROOT_NAME = 'StatusBadgeRoot';
 const STATUS_BADGE_ICON_NAME = 'StatusBadgeIcon';
@@ -157,7 +156,7 @@ function StatusBadgeDot({
 StatusBadgeDot.displayName = STATUS_BADGE_DOT_NAME;
 
 export {
-  StatusBadgeRoot as Root,
-  StatusBadgeIcon as Icon,
   StatusBadgeDot as Dot,
+  StatusBadgeIcon as Icon,
+  StatusBadgeRoot as Root,
 };

@@ -1,16 +1,3 @@
-/**
- * @fileoverview Defines typed API failures with HTTP status and a safe error code.
- *
- * Lets callers handle failures without exposing arbitrary backend messages.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 class ApiError extends Error {
   constructor(
     public readonly status: number,
@@ -37,10 +24,4 @@ class ApiError extends Error {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default ApiError;
-
-// ---------------------------------------------------------------------------

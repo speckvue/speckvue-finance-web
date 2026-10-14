@@ -2,12 +2,11 @@
 
 // AlignUI Drawer v0.0.0
 
-import * as React from 'react';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { RiCloseLine } from '@remixicon/react';
-
 import * as CompactButton from '@/components/ui/compact-button';
 import { cn } from '@/utils/cn';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { RiCloseLine } from '@remixicon/react';
+import * as React from 'react';
 
 const DrawerRoot = DialogPrimitive.Root;
 DrawerRoot.displayName = 'Drawer';
@@ -145,12 +144,12 @@ function DrawerFooter({
 DrawerFooter.displayName = 'DrawerFooter';
 
 export {
-  DrawerRoot as Root,
-  DrawerTrigger as Trigger,
+  DrawerBody as Body,
   DrawerClose as Close,
   DrawerContent as Content,
-  DrawerHeader as Header,
-  DrawerTitle as Title,
-  DrawerBody as Body,
   DrawerFooter as Footer,
+  DrawerHeader as Header,
+  DrawerRoot as Root,
+  DrawerTitle as Title,
+  DrawerTrigger as Trigger,
 };

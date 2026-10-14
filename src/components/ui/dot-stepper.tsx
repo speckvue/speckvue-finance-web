@@ -2,12 +2,11 @@
 
 // AlignUI DotStepper v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { cn } from '@/utils/cn';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const DOT_STEPPER_ROOT_NAME = 'DotStepperRoot';
 const DOT_STEPPER_ITEM_NAME = 'DotStepperItem';
@@ -102,4 +101,4 @@ const DotStepperItem = React.forwardRef<HTMLButtonElement, DotStepperItemProps>(
 );
 DotStepperItem.displayName = DOT_STEPPER_ITEM_NAME;
 
-export { DotStepperRoot as Root, DotStepperItem as Item };
+export { DotStepperItem as Item, DotStepperRoot as Root };

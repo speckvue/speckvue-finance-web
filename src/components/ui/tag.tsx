@@ -2,13 +2,12 @@
 
 // AlignUI Tag v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { RiCloseFill } from '@remixicon/react';
-
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import { RiCloseFill } from '@remixicon/react';
+import * as React from 'react';
 
 const TAG_ROOT_NAME = 'TagRoot';
 const TAG_ICON_NAME = 'TagIcon';
@@ -183,8 +182,8 @@ function TagDismissIcon<T extends React.ElementType>({
 TagDismissIcon.displayName = TAG_DISMISS_ICON_NAME;
 
 export {
-  TagRoot as Root,
-  TagIcon as Icon,
   TagDismissButton as DismissButton,
   TagDismissIcon as DismissIcon,
+  TagIcon as Icon,
+  TagRoot as Root,
 };

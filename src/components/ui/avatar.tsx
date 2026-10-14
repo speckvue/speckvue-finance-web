@@ -2,9 +2,6 @@
 
 // AlignUI Avatar v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import {
   IconEmptyCompany,
   IconEmptyUser,
@@ -12,6 +9,8 @@ import {
 import { cn } from '@/utils/cn';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 export const AVATAR_ROOT_NAME = 'AvatarRoot';
 const AVATAR_IMAGE_NAME = 'AvatarImage';
@@ -318,10 +317,10 @@ function AvatarNotification({
 AvatarNotification.displayName = AVATAR_NOTIFICATION_NAME;
 
 export {
-  AvatarRoot as Root,
+  AvatarBrandLogo as BrandLogo,
   AvatarImage as Image,
   AvatarIndicator as Indicator,
-  AvatarStatus as Status,
-  AvatarBrandLogo as BrandLogo,
   AvatarNotification as Notification,
+  AvatarRoot as Root,
+  AvatarStatus as Status,
 };

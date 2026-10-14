@@ -2,7 +2,8 @@
 
 // AlignUI Notification v0.0.0
 
-import * as React from 'react';
+import * as Alert from '@/components/ui/alert';
+import { cn } from '@/utils/cn';
 import * as NotificationPrimitives from '@radix-ui/react-toast';
 import {
   RiAlertFill,
@@ -11,9 +12,7 @@ import {
   RiInformationFill,
   RiMagicFill,
 } from '@remixicon/react';
-
-import * as Alert from '@/components/ui/alert';
-import { cn } from '@/utils/cn';
+import * as React from 'react';
 
 const NotificationProvider = NotificationPrimitives.Provider;
 const NotificationAction = NotificationPrimitives.Action;
@@ -131,9 +130,9 @@ const Notification = React.forwardRef<
 Notification.displayName = 'Notification';
 
 export {
-  Notification as Root,
-  NotificationProvider as Provider,
   NotificationAction as Action,
+  NotificationProvider as Provider,
+  Notification as Root,
   NotificationViewport as Viewport,
   type NotificationProps,
 };

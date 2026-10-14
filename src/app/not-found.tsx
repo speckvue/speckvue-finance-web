@@ -1,23 +1,5 @@
-/**
- * @fileoverview Displays the missing-page state and a navigation action.
- *
- * Helps users return to the application from an unknown URL.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import Link from 'next/link';
-
 import * as Button from '@/components/ui/button';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import Link from 'next/link';
 
 const NotFound = () => {
   return (
@@ -34,10 +16,4 @@ const NotFound = () => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default NotFound;
-
-// ---------------------------------------------------------------------------

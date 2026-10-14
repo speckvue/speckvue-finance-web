@@ -1,29 +1,8 @@
-/**
- * @fileoverview Combines Next.js lint rules with project and vendor exceptions.
- *
- * Checks source quality while respecting upstream component APIs.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { defineConfig, globalIgnores } from 'eslint/config';
-
 import nextVitals from 'eslint-config-next/core-web-vitals';
-
 import nextTs from 'eslint-config-next/typescript';
-
 import prettier from 'eslint-config-prettier/flat';
-
 import unusedImports from 'eslint-plugin-unused-imports';
-
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
+import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
   ...nextVitals,
@@ -32,6 +11,10 @@ export default defineConfig([
   {
     plugins: { 'unused-imports': unusedImports },
     rules: { 'unused-imports/no-unused-imports': 'error' },
+  },
+  {
+    files: ['**/*.cjs'],
+    rules: { '@typescript-eslint/no-require-imports': 'off' },
   },
   // Vendored AlignUI code retains upstream composition and generic types.
   {
@@ -65,5 +48,3 @@ export default defineConfig([
     'next-env.d.ts',
   ]),
 ]);
-
-// ---------------------------------------------------------------------------

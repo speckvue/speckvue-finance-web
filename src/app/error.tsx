@@ -1,23 +1,6 @@
-/**
- * @fileoverview Displays a recoverable route error with a retry action.
- *
- * Lets users recover from rendering failures within the application shell.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import Feedback from '@/components/shared/feedback';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const ErrorPage = ({
   reset,
@@ -37,10 +20,4 @@ const ErrorPage = ({
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default ErrorPage;
-
-// ---------------------------------------------------------------------------

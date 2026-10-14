@@ -1,39 +1,14 @@
-/**
- * @fileoverview Defines transaction columns and connects them to the shared data table.
- *
- * Presents sample transaction amounts, dates, and statuses consistently.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
 'use client';
 
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import type { ColumnDef } from '@tanstack/react-table';
-
-import dataTableFeatures from '@/lib/constants/table-features';
-
-import * as Badge from '@/components/ui/badge';
-
 import DataTable from '@/components/shared/data-table';
-
 import Feedback from '@/components/shared/feedback';
-
-import useDemoTransactions from '@/features/dashboard/hooks/use-demo-transactions';
-
+import * as Badge from '@/components/ui/badge';
 import type { Transaction } from '@/features/dashboard/data/transactions';
-
-import formatMoney from '@/lib/utils/money';
-
+import useDemoTransactions from '@/features/dashboard/hooks/use-demo-transactions';
+import dataTableFeatures from '@/lib/constants/table-features';
 import formatDate from '@/lib/utils/date';
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
+import formatMoney from '@/lib/utils/money';
+import type { ColumnDef } from '@tanstack/react-table';
 
 const columns: ColumnDef<typeof dataTableFeatures, Transaction>[] = [
   {
@@ -88,10 +63,6 @@ const columns: ColumnDef<typeof dataTableFeatures, Transaction>[] = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
-
 const TransactionTable = () => {
   const query = useDemoTransactions();
   if (query.isError)
@@ -114,10 +85,4 @@ const TransactionTable = () => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default TransactionTable;
-
-// ---------------------------------------------------------------------------

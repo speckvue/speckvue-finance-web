@@ -2,11 +2,10 @@
 
 // AlignUI AvatarGroupCompact v0.0.0
 
-import * as React from 'react';
-
 import { AVATAR_ROOT_NAME } from '@/components/ui/avatar';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import * as React from 'react';
 
 const AVATAR_GROUP_COMPACT_ROOT_NAME = 'AvatarGroupCompactRoot';
 const AVATAR_GROUP_COMPACT_STACK_NAME = 'AvatarGroupCompactStack';
@@ -113,7 +112,7 @@ function AvatarGroupCompactOverflow({
 AvatarGroupCompactOverflow.displayName = AVATAR_GROUP_COMPACT_OVERFLOW_NAME;
 
 export {
+  AvatarGroupCompactOverflow as Overflow,
   AvatarGroupCompactRoot as Root,
   AvatarGroupCompactStack as Stack,
-  AvatarGroupCompactOverflow as Overflow,
 };

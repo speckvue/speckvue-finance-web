@@ -1,23 +1,5 @@
-/**
- * @fileoverview Adds a request-specific nonce and Content Security Policy to responses.
- *
- * Restricts script execution and connection origins for application pages.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
 import publicEnv from '@/lib/config/public-env';
-
 import { NextRequest, NextResponse } from 'next/server';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
 
 const proxy = (request: NextRequest) => {
   const nonce = btoa(crypto.randomUUID());
@@ -44,20 +26,10 @@ const proxy = (request: NextRequest) => {
   return response;
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default proxy;
-
-// ---------------------------------------------------------------------------
-// Types / Constants
-// ---------------------------------------------------------------------------
 
 export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|icon.svg|robots.txt).*)',
   ],
 };
-
-// ---------------------------------------------------------------------------

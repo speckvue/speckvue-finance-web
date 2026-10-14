@@ -1,23 +1,5 @@
-/**
- * @fileoverview Provides the shared layout and navigation for legal pages.
- *
- * Makes policy pages accessible outside the protected application shell.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import Link from 'next/link';
-
 import Brand from '@/components/shared/brand';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import Link from 'next/link';
 
 const LegalLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -47,10 +29,4 @@ const LegalLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Exports
-// ---------------------------------------------------------------------------
-
 export default LegalLayout;
-
-// ---------------------------------------------------------------------------

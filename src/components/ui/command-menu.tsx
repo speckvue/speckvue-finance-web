@@ -2,14 +2,13 @@
 
 // AlignUI CommandMenu v0.0.0
 
-import * as React from 'react';
-import { type DialogProps } from '@radix-ui/react-dialog';
-import { Command } from 'cmdk';
-
 import * as Modal from '@/components/ui/modal';
 import { cn } from '@/utils/cn';
 import { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { tv, type VariantProps } from '@/utils/tv';
+import { type DialogProps } from '@radix-ui/react-dialog';
+import { Command } from 'cmdk';
+import * as React from 'react';
 
 const CommandDialogTitle = Modal.Title;
 const CommandDialogDescription = Modal.Description;
@@ -195,13 +194,13 @@ function CommandFooterKeyBox({
 
 export {
   CommandDialog as Dialog,
-  CommandDialogTitle as DialogTitle,
   CommandDialogDescription as DialogDescription,
-  CommandInput as Input,
-  CommandList as List,
-  CommandGroup as Group,
-  CommandItem as Item,
-  CommandItemIcon as ItemIcon,
+  CommandDialogTitle as DialogTitle,
   CommandFooter as Footer,
   CommandFooterKeyBox as FooterKeyBox,
+  CommandGroup as Group,
+  CommandInput as Input,
+  CommandItem as Item,
+  CommandItemIcon as ItemIcon,
+  CommandList as List,
 };

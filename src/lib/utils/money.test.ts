@@ -1,27 +1,7 @@
-/**
- * @fileoverview Tests monetary parsing, addition, and currency formatting.
- *
- * Protects precision and currency-specific minor-unit behavior.
- *
- * @author Speckvue contributors
- * @license LicenseRef-Speckvue-Proprietary
- */
-
-// ---------------------------------------------------------------------------
-// Imports
-// ---------------------------------------------------------------------------
-
-import { describe, expect, it } from 'vitest';
-
 import addMoney from '@/lib/utils/add-money';
-
 import formatMoney from '@/lib/utils/money';
-
 import parseMoney from '@/lib/utils/parse-money';
-
-// ---------------------------------------------------------------------------
-// Main implementation
-// ---------------------------------------------------------------------------
+import { describe, expect, it } from 'vitest';
 
 describe('money', () => {
   it('adds decimal amounts exactly using integer minor units', () => {
@@ -41,5 +21,3 @@ describe('money', () => {
     ).toThrow();
   });
 });
-
-// ---------------------------------------------------------------------------

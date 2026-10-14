@@ -2,13 +2,12 @@
 
 // AlignUI Pagination v0.0.0
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-
 import { cn } from '@/utils/cn';
 import type { PolymorphicComponentProps } from '@/utils/polymorphic';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 const PAGINATION_ROOT_NAME = 'PaginationRoot';
 const PAGINATION_ITEM_NAME = 'PaginationItem';
@@ -186,8 +185,8 @@ function PaginationNavIcon<T extends React.ElementType>({
 PaginationNavIcon.displayName = PAGINATION_NAV_ICON_NAME;
 
 export {
-  PaginationRoot as Root,
   PaginationItem as Item,
   PaginationNavButton as NavButton,
   PaginationNavIcon as NavIcon,
+  PaginationRoot as Root,
 };
