@@ -36,6 +36,20 @@ test('only exposes explicitly allowed backend routes', async () => {
   expect(backend).not.toHaveBeenCalled();
 });
 
+test('preserves financial account filters and pagination when forwarding', async () => {
+  backend.mockResolvedValue(new Response('{}'));
+  const search = '?status=archived&after=d07a6c6d-5ea4-4a1b-9b6b-b9716a4f22b6';
+  expect(
+    (
+      await GET(
+        new NextRequest(origin + '/api/backend/accounts' + search),
+        context('accounts'),
+      )
+    ).status,
+  ).toBe(200);
+  expect(backend).toHaveBeenCalledWith('/accounts' + search, expect.anything());
+});
+
 test('forwards origin and CSRF and makes HttpOnly cookies available to server pages', async () => {
   backend.mockResolvedValue(
     new Response('{}', {

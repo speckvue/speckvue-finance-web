@@ -1,6 +1,9 @@
 # Source inventory
 
 ```text
+src/app/(account)/accounts/error.tsx
+src/app/(account)/accounts/loading.tsx
+src/app/(account)/accounts/page.tsx
 src/app/(account)/layout.tsx
 src/app/(account)/onboarding/page.tsx
 src/app/(account)/settings/page.tsx
@@ -20,12 +23,16 @@ src/app/loading.tsx
 src/app/not-found.tsx
 src/app/page.tsx
 src/app/robots.ts
+src/components/shared/app-shell.tsx
+src/components/shared/brand-symbol.tsx
 src/components/shared/brand.tsx
 src/components/shared/data-table.test.tsx
 src/components/shared/data-table.tsx
 src/components/shared/feedback.test.tsx
 src/components/shared/feedback.tsx
 src/components/shared/form-field.tsx
+src/components/shared/profile-menu.tsx
+src/components/shared/scroll-area.tsx
 src/components/shared/text-field.tsx
 src/components/shared/theme-switcher.tsx
 src/components/ui/accordion.tsx
@@ -80,12 +87,19 @@ src/components/ui/toast-alert.tsx
 src/components/ui/toast.tsx
 src/components/ui/tooltip.tsx
 src/components/ui/vertical-stepper.tsx
+src/features/accounts/accounts.test.ts
+src/features/accounts/components/account-form.tsx
+src/features/accounts/components/accounts-workspace.test.tsx
+src/features/accounts/components/accounts-workspace.tsx
+src/features/accounts/contracts.ts
+src/features/accounts/format-money.ts
 src/features/auth/client.ts
 src/features/auth/components/auth-form.test.tsx
 src/features/auth/components/auth-form.tsx
 src/features/auth/components/security-settings.tsx
 src/features/auth/components/signout-button.tsx
 src/features/preferences/components/account-theme.tsx
+src/features/preferences/components/preferences-form.test.tsx
 src/features/preferences/components/preferences-form.tsx
 src/hooks/use-tab-observer.tsx
 src/instrumentation.ts
@@ -102,6 +116,7 @@ src/lib/constants/table-features.ts
 src/lib/logging/create-logger.test.ts
 src/lib/logging/create-logger.ts
 src/lib/logging/logger.ts
+src/lib/preferences/options.ts
 src/lib/providers/app-providers.tsx
 src/lib/query/client.ts
 src/lib/redis/cache.test.ts
@@ -130,6 +145,4 @@ src/utils/cn.ts
 src/utils/polymorphic.ts
 src/utils/recursive-clone-children.ts
 src/utils/tv.ts
-public/brand/logo-dark.svg
-public/brand/logo-light.svg
 ```

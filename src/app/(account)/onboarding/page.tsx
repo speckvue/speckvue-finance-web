@@ -1,5 +1,6 @@
 import PreferencesForm from '@/features/preferences/components/preferences-form';
 import requireUser from '@/lib/auth/session';
+import preferenceOptions from '@/lib/preferences/options';
 import { redirect } from 'next/navigation';
 export default async function OnboardingPage() {
   const user = await requireUser(false);
@@ -12,7 +13,7 @@ export default async function OnboardingPage() {
         Choose how you want to see your finances. You can change these
         preferences in settings.
       </p>
-      <PreferencesForm user={user} onboarding />
+      <PreferencesForm user={user} options={preferenceOptions()} onboarding />
     </div>
   );
 }

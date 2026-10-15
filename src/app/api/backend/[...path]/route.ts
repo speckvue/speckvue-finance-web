@@ -15,6 +15,7 @@ const routes: Record<string, readonly string[]> = {
   'users/me': ['GET'],
   'users/me/onboarding': ['POST'],
   'users/me/preferences': ['PATCH'],
+  accounts: ['GET', 'POST'],
 };
 
 const handler = async (
@@ -24,7 +25,13 @@ const handler = async (
   const path = (await context.params).path.join('/');
   const methods =
     routes[path] ??
-    (/^auth\/sessions\/[0-9a-f-]{36}$/i.test(path) ? ['DELETE'] : undefined);
+    (/^auth\/sessions\/[0-9a-f-]{36}$/i.test(path)
+      ? ['DELETE']
+      : /^accounts\/[0-9a-f-]{36}$/i.test(path)
+        ? ['GET', 'PATCH']
+        : /^accounts\/[0-9a-f-]{36}\/(archive|restore)$/i.test(path)
+          ? ['POST']
+          : undefined);
   const reply = (status: number) =>
     Response.json(
       { message: 'Request unavailable' },
@@ -66,7 +73,7 @@ const handler = async (
       }
       body = Buffer.concat(chunks).toString('utf8');
     }
-    const upstream = await backendFetch('/' + path, {
+    const upstream = await backendFetch('/' + path + request.nextUrl.search, {
       method: request.method,
       headers,
       body,

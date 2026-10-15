@@ -4,4 +4,4 @@ Next.js Server Components verify the backend session at every private page bound
 
 See accounts-and-preferences.md for the session gateway, onboarding contract, preferences and security flows. Providers own TanStack Query and next-themes. Google Sans is the default font and Poppins styles headings. The CSP proxy supplies a nonce and prevents framing.
 
-Feature code lives in src/features/auth and src/features/preferences. Shared UI, form fields, tables, feedback, schema-validated API requests, safe redirects and exact money helpers remain reusable. Redis and Winston are Node-only; private responses are never cached. No sample financial modules are exposed.
+Feature code lives in src/features/auth, src/features/preferences, and src/features/accounts. The shared AppShell provides responsive navigation and the signed-in product frame. Shared UI, form fields, tables, feedback, schema-validated API requests, safe redirects and exact money helpers remain reusable. Redis and Winston are Node-only; private responses are never cached. See [financial accounts](financial-accounts.md) for the real account lifecycle and exact money handling.

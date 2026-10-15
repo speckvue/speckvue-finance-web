@@ -95,15 +95,13 @@ services:
     develop:
       watch:
         - action: sync
-          path: .
-          target: /app
+          path: ./src
+          target: /app/src
           initial_sync: true
-          include:
-            - src/**
-            - public/**
-          ignore:
-            - node_modules/
-            - .next/
+        - action: sync
+          path: ./public
+          target: /app/public
+          initial_sync: true
         - action: sync+restart
           path: ./scripts
           target: /app/scripts

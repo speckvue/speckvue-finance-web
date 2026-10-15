@@ -1,6 +1,7 @@
 import SecuritySettings from '@/features/auth/components/security-settings';
 import PreferencesForm from '@/features/preferences/components/preferences-form';
 import requireUser from '@/lib/auth/session';
+import preferenceOptions from '@/lib/preferences/options';
 export default async function SettingsPage() {
   const user = await requireUser();
   return (
@@ -9,7 +10,7 @@ export default async function SettingsPage() {
       <p className="mb-8 text-text-sub-600">
         Manage your preferences and account security.
       </p>
-      <PreferencesForm user={user} />
+      <PreferencesForm user={user} options={preferenceOptions()} />
       <SecuritySettings
         locale={user.locale ?? 'en-US'}
         timezone={user.timezone ?? 'UTC'}

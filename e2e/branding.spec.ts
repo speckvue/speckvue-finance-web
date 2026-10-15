@@ -8,8 +8,9 @@ test('supplied logo follows the selected theme', async ({
   const light = page.locator('img[src="/brand/logo-light.svg"]');
   const dark = page.locator('img[src="/brand/logo-dark.svg"]');
   for (const theme of ['Light', 'Dark'] as const) {
-    await page.getByRole('button', { name: /Theme:/ }).click();
-    await page.getByRole('menuitemradio', { name: theme, exact: true }).click();
+    await page.emulateMedia({
+      colorScheme: theme === 'Dark' ? 'dark' : 'light',
+    });
     await expect(theme === 'Light' ? light : dark).toBeVisible();
     await expect(theme === 'Light' ? dark : light).toBeHidden();
     await page.screenshot({

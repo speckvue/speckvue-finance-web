@@ -3,9 +3,10 @@ import { expect, test } from '@playwright/test';
 
 for (const theme of ['Light', 'Dark'] as const) {
   test('starter page is accessible in ' + theme + ' mode', async ({ page }) => {
+    await page.emulateMedia({
+      colorScheme: theme === 'Dark' ? 'dark' : 'light',
+    });
     await page.goto('/');
-    await page.getByRole('button', { name: /Theme:/ }).click();
-    await page.getByRole('menuitemradio', { name: theme, exact: true }).click();
     await expect(page.locator('html')).toHaveClass(
       new RegExp(theme.toLowerCase()),
     );

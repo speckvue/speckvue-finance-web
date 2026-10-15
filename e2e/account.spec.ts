@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 test('anonymous users cannot render protected account pages', async ({
   page,
 }) => {
-  for (const route of ['/workspace', '/settings', '/onboarding']) {
+  for (const route of ['/workspace', '/settings', '/onboarding', '/accounts']) {
     await page.goto(route);
     await expect(page).toHaveURL(/\/signin$/);
     await expect(
@@ -50,6 +50,8 @@ test('signup, onboarding, saved settings and signout work against the API', asyn
   await expect(
     page.getByRole('heading', { name: 'Welcome, Alex' }),
   ).toBeVisible();
+  if ((page.viewportSize()?.width ?? 1440) < 768)
+    await page.getByRole('button', { name: 'Open navigation' }).click();
   await page.getByRole('link', { name: 'Settings', exact: true }).click();
   await expect(page.getByLabel('Base currency')).toHaveValue('INR');
   await page.getByLabel('Your name').fill('Alex Updated');
@@ -89,7 +91,10 @@ test('signup, onboarding, saved settings and signout work against the API', asyn
   await expect(
     page.getByRole('heading', { name: 'Welcome, Alex Updated' }),
   ).toBeVisible();
-  await page.getByRole('button', { name: 'Signout', exact: true }).click();
+  if ((page.viewportSize()?.width ?? 1440) < 768)
+    await page.getByRole('button', { name: 'Open navigation' }).click();
+  await page.getByRole('button', { name: /Open profile menu/ }).click();
+  await page.getByRole('menuitem', { name: 'Signout', exact: true }).click();
   await expect(page).toHaveURL(/\/signin$/);
   await page.goto('/settings');
   await expect(page).toHaveURL(/\/signin$/);
