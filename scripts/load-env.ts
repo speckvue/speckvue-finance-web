@@ -38,6 +38,8 @@ const environmentSchema = z.object({
   REDIS_COMMAND_TIMEOUT_MS: z.coerce.number().int().positive(),
   REDIS_CACHE_TTL_SECONDS: z.coerce.number().int().positive(),
   API_INTERNAL_URL: z.url(),
+  API_BASE_PATH: z.string().regex(/^\/[a-z][a-z0-9-]*\/v[1-9][0-9]*$/),
+  SESSION_COOKIE_NAME: z.string().regex(/^[A-Za-z0-9_-]+$/),
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
   NEXT_PUBLIC_APP_URL: z.url(),
   NEXT_PUBLIC_API_URL: z.url(),

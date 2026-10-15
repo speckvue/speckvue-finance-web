@@ -1,0 +1,88 @@
+// @vitest-environment node
+import { NextRequest } from 'next/server';
+import { beforeEach, expect, test, vi } from 'vitest';
+import { GET, POST } from './route';
+
+const backend = vi.hoisted(() => vi.fn());
+vi.mock('@/lib/auth/backend', () => ({ default: backend }));
+beforeEach(() => vi.clearAllMocks());
+const context = (path: string) => ({
+  params: Promise.resolve({ path: path.split('/') }),
+});
+const origin = process.env.NEXT_PUBLIC_APP_URL!;
+
+test('rejects untrusted mutations without contacting the API', async () => {
+  const response = await POST(
+    new NextRequest(origin + '/api/backend/auth/signin', {
+      method: 'POST',
+      headers: {
+        Origin: 'https://evil.invalid',
+        'Content-Type': 'application/json',
+      },
+      body: '{}',
+    }),
+    context('auth/signin'),
+  );
+  expect(response.status).toBe(403);
+  expect(backend).not.toHaveBeenCalled();
+});
+
+test('only exposes explicitly allowed backend routes', async () => {
+  const response = await GET(
+    new NextRequest(origin + '/api/backend/admin'),
+    context('admin'),
+  );
+  expect(response.status).toBe(404);
+  expect(backend).not.toHaveBeenCalled();
+});
+
+test('forwards origin and CSRF and makes HttpOnly cookies available to server pages', async () => {
+  backend.mockResolvedValue(
+    new Response('{}', {
+      headers: {
+        'Set-Cookie': 'session=value; Path=/api; HttpOnly; SameSite=Lax',
+      },
+    }),
+  );
+  const response = await POST(
+    new NextRequest(origin + '/api/backend/auth/signin', {
+      method: 'POST',
+      headers: {
+        Origin: new URL(origin).origin,
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': 'token',
+      },
+      body: '{}',
+    }),
+    context('auth/signin'),
+  );
+  expect(response.status).toBe(200);
+  expect(response.headers.get('set-cookie')).toContain('Path=/; HttpOnly');
+  expect(response.headers.get('cache-control')).toBe('no-store');
+  const headers = backend.mock.calls[0]?.[1].headers as Headers;
+  expect(headers.get('origin')).toBe(new URL(origin).origin);
+  expect(headers.get('x-csrf-token')).toBe('token');
+});
+
+test('bounds payloads and fails safely during API outages', async () => {
+  const response = await POST(
+    new NextRequest(origin + '/api/backend/auth/signup', {
+      method: 'POST',
+      headers: {
+        Origin: new URL(origin).origin,
+        'Content-Type': 'application/json',
+      },
+      body: 'x'.repeat(16385),
+    }),
+    context('auth/signup'),
+  );
+  expect(response.status).toBe(413);
+  expect(backend).not.toHaveBeenCalled();
+  backend.mockRejectedValue(new Error('private connection data'));
+  const failed = await GET(
+    new NextRequest(origin + '/api/backend/users/me'),
+    context('users/me'),
+  );
+  expect(failed.status).toBe(503);
+  expect(await failed.text()).not.toContain('private connection');
+});

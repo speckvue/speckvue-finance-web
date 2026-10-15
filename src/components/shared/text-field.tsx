@@ -9,12 +9,18 @@ const TextField = ({
   label,
   errors = [],
   hint,
+  trailing,
   ...props
-}: Omit<Props, 'children'> &
-  Omit<React.ComponentProps<typeof Input.Input>, 'id'>) => {
+}: Omit<Props, 'children'> & { trailing?: React.ReactNode } & Omit<
+    React.ComponentProps<typeof Input.Input>,
+    'id'
+  >) => {
   return (
     <FormField id={id} label={label} errors={errors} hint={hint}>
-      <Input.Root hasError={errors.length > 0}>
+      <Input.Root
+        hasError={errors.length > 0}
+        className={trailing ? 'divide-x-0' : undefined}
+      >
         <Input.Wrapper>
           <Input.Input
             id={id}
@@ -25,6 +31,7 @@ const TextField = ({
             {...props}
           />
         </Input.Wrapper>
+        {trailing}
       </Input.Root>
     </FormField>
   );

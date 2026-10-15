@@ -2,7 +2,7 @@
 
 Web application for Speckvue Finance, providing an intuitive interface to manage personal finances, track expenses, monitor income, and organize budgets.
 
-A clean Next.js application foundation. The homepage contains only the application identity and theme control. No demo dashboard, sample transactions, simulated authentication, legal placeholders, or sample feature endpoints are shipped.
+A Next.js personal finance foundation with real email/password authentication, onboarding, saved preferences and session security. No demo financial data or sample finance endpoints are shipped. See docs/accounts-and-preferences.md for the implemented account flows and current delivery limitations.
 
 ## Start
 
@@ -12,7 +12,7 @@ For compiled Docker execution run npm run docker:prod. For development with sour
 
 ## Foundation
 
-Strict TypeScript, Next.js App Router, AlignUI components, Tailwind, next-themes, Google Sans for body text and Poppins for headings, TanStack Query/Table/Form, Zod, an API client, safe redirects, exact money helpers, accessible error states, CSP and security headers remain available for real features. There is no frontend session adapter or authentication bypass. Implement verified server-side sessions before adding protected routes.
+Strict TypeScript, Next.js App Router, AlignUI components, Tailwind, next-themes, Google Sans for body text and Poppins for headings, TanStack Query/Table/Form, Zod, an API client, safe redirects, exact money helpers, accessible error states, CSP and security headers remain available for real features. Protected pages verify real backend sessions on the server. The same-origin API gateway forwards HttpOnly cookies and CSRF-protected writes.
 
 Winston provides JSON console output and rotating files. Redis is server-only; GET /api/health reports Redis readiness. The reusable public-data cache helper validates cached values and falls back to its origin during cache failure. No private or financial data is cached.
 
@@ -22,6 +22,6 @@ Run npm run check, npm run test:ci, npm run build, and npm run test:e2e. Browser
 
 ## Structure
 
-src/app contains the starter route, errors and health endpoint. src/components contains reusable UI and shared components. src/lib contains API, query, configuration, validation, logging, Redis and utility infrastructure. Add feature folders when implementing actual product behavior. See docs/conventions.md, docs/architecture.md, docs/docker.md and docs/infrastructure.md.
+src/app contains public authentication routes, protected onboarding/workspace/settings pages, the API gateway, error boundaries and health endpoint. src/components contains reusable UI and shared components. src/lib contains API, query, configuration, validation, logging, Redis and utility infrastructure. Add feature folders when implementing actual product behavior. See docs/conventions.md, docs/architecture.md, docs/docker.md and docs/infrastructure.md.
 
 First-party source is proprietary and intended for the private Speckvue repository. Dependency and AlignUI attribution remains in LICENSE, THIRD_PARTY_NOTICES.md and THIRD_PARTY_LICENSES.txt.

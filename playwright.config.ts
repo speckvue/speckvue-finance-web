@@ -1,14 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 import loadEnv from './scripts/load-env.ts';
-import prepareStandalone from './scripts/prepare-standalone.ts';
-
-prepareStandalone();
 
 const env = loadEnv();
 
-const baseURL = `http://${env.APP_HOST}:${env.APP_PORT}`;
+const baseURL = env.NEXT_PUBLIC_APP_URL;
 
 export default defineConfig({
+  globalSetup: './scripts/prepare-standalone.ts',
   testDir: './e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

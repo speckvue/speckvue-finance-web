@@ -1,7 +1,9 @@
 # Verification
 
-The template cleanup removes sample features and updates checks for the remaining infrastructure. Run npm run check, npm run test:ci and npm run build. Run npm run infra:up before npm run test:e2e; free APP_PORT for the compiled test server. Browser checks cover theme persistence, accessibility, readiness, security headers and removed routes.
+Verified on 2026-10-16 for authentication, onboarding and preferences.
 
-Docker production and Watch configurations remain supported. Earlier sample-feature test counts are historical and do not describe this template.
+32 frontend unit tests passed, including form submission, schema validation and gateway security. Twenty desktop/mobile browser scenarios passed across the connected run and the targeted accessibility rerun after fixing a Windows setup race. Connected checks used disposable PostgreSQL/Redis and covered signup, signin, onboarding, preference persistence, password change, signout, protected redirects, theme persistence, accessibility and supplied logo variants.
 
-Verified on 2026-10-15: 25 unit tests and 14 desktop/mobile browser tests passed. Strict TypeScript, ESLint, Prettier, native Next build and Docker production image build passed. Browser checks confirm theme persistence, accessibility, security headers, Redis readiness and 404 responses for removed routes.
+Strict TypeScript, ESLint, Prettier and native production builds passed. Docker production image builds passed during the account implementation. The final checkout is running in Docker development mode: Next.js uses webpack development mode and Nest uses --watch. Compose Watch processes are active in both repositories; temporary file synchronization probes were verified and removed. PostgreSQL and both Redis services are healthy.
+
+No SMTP service is configured. Email verification and forgotten-password delivery remain unavailable. No test accounts were added to the regular application database.

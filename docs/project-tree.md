@@ -1,6 +1,15 @@
 # Source inventory
 
 ```text
+src/app/(account)/layout.tsx
+src/app/(account)/onboarding/page.tsx
+src/app/(account)/settings/page.tsx
+src/app/(account)/workspace/page.tsx
+src/app/(auth)/layout.tsx
+src/app/(auth)/signin/page.tsx
+src/app/(auth)/signup/page.tsx
+src/app/api/backend/[...path]/route.test.ts
+src/app/api/backend/[...path]/route.ts
 src/app/api/health/route.test.ts
 src/app/api/health/route.ts
 src/app/error.tsx
@@ -71,11 +80,21 @@ src/components/ui/toast-alert.tsx
 src/components/ui/toast.tsx
 src/components/ui/tooltip.tsx
 src/components/ui/vertical-stepper.tsx
+src/features/auth/client.ts
+src/features/auth/components/auth-form.test.tsx
+src/features/auth/components/auth-form.tsx
+src/features/auth/components/security-settings.tsx
+src/features/auth/components/signout-button.tsx
+src/features/preferences/components/account-theme.tsx
+src/features/preferences/components/preferences-form.tsx
 src/hooks/use-tab-observer.tsx
 src/instrumentation.ts
 src/lib/api/api-error.ts
 src/lib/api/client.test.ts
 src/lib/api/client.ts
+src/lib/auth/backend.ts
+src/lib/auth/contracts.ts
+src/lib/auth/session.ts
 src/lib/config/infrastructure-env.ts
 src/lib/config/public-env.test.ts
 src/lib/config/public-env.ts
@@ -111,4 +130,6 @@ src/utils/cn.ts
 src/utils/polymorphic.ts
 src/utils/recursive-clone-children.ts
 src/utils/tv.ts
+public/brand/logo-dark.svg
+public/brand/logo-light.svg
 ```

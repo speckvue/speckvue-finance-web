@@ -22,8 +22,10 @@ const apiRequest = async <T>(
 ): Promise<T> => {
   if (!path.startsWith('/') || path.startsWith('//') || path.includes('\\'))
     throw new Error('API paths must be relative to the configured API origin.');
-  const base = new URL(publicEnv.NEXT_PUBLIC_API_URL);
-  const url = new URL(path, base);
+  const base = new URL(publicEnv.NEXT_PUBLIC_APP_URL);
+  const url = new URL('/api/backend' + path, base);
+  if (!url.pathname.startsWith('/api/backend/'))
+    throw new Error('Invalid API path.');
   if (url.origin !== base.origin) throw new Error('Invalid API origin.');
   const timeout = AbortSignal.timeout(timeoutMs);
   const headers = new Headers(options.headers);
@@ -31,7 +33,7 @@ const apiRequest = async <T>(
   if (body !== undefined) headers.set('Content-Type', 'application/json');
   if (csrfToken) headers.set('X-CSRF-Token', csrfToken);
   try {
-    const response = await fetch(url, {
+    const response = await fetch(url.pathname + url.search, {
       ...options,
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
@@ -47,7 +49,7 @@ const apiRequest = async <T>(
           ? 'unauthorized'
           : response.status === 403
             ? 'forbidden'
-            : response.status === 422
+            : response.status === 400 || response.status === 422
               ? 'validation'
               : 'http',
       );

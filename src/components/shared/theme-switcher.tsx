@@ -18,7 +18,9 @@ const preferences = [
   { value: 'system', label: 'System', icon: RiComputerLine },
 ] as const;
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = ({
+  onThemeChange,
+}: { onThemeChange?: (value: string) => void } = {}) => {
   const mounted = useSyncExternalStore(
     subscribe,
     () => true,
@@ -58,7 +60,10 @@ const ThemeSwitcher = () => {
         <Dropdown.RadioGroup
           aria-label="Appearance"
           value={current}
-          onValueChange={setTheme}
+          onValueChange={(value) => {
+            setTheme(value);
+            onThemeChange?.(value);
+          }}
         >
           {preferences.map(({ value, label, icon }) => (
             <Dropdown.RadioItem
