@@ -2,7 +2,7 @@
 
 Web application for Speckvue Finance, providing an intuitive interface to manage personal finances, track expenses, monitor income, and organize budgets.
 
-A Next.js personal finance application with real email/password authentication, onboarding, saved preferences, session security, and manual financial accounts. No demo financial data or sample finance endpoints are shipped. See [financial accounts](docs/financial-accounts.md) and [account access](docs/accounts-and-preferences.md) for implemented flows and current delivery limitations.
+A Next.js personal finance application with real email/password authentication, onboarding, saved preferences, session security, manual financial accounts, income/expense categories, payee management, and manual transactions with balance updates. No demo financial data or sample finance endpoints are shipped. See [financial accounts](docs/financial-accounts.md), [categories](docs/categories.md), [payees](docs/payees.md), [manual transactions](docs/manual-transactions.md), and [account access](docs/accounts-and-preferences.md) for implemented flows and current delivery limitations.
 
 ## Start
 

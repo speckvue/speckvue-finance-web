@@ -1,22 +1,30 @@
 import AccountsWorkspace from '@/features/accounts/components/accounts-workspace';
-import { accountsSchema } from '@/features/accounts/contracts';
+import {
+  accountOptionsSchema,
+  accountsSchema,
+} from '@/features/accounts/contracts';
 import backendFetch from '@/lib/auth/backend';
 import requireUser from '@/lib/auth/session';
-import preferenceOptions from '@/lib/preferences/options';
 
 export const metadata = { title: 'Accounts' };
 
 export default async function AccountsPage() {
   const user = await requireUser();
-  const response = await backendFetch('/accounts');
-  if (!response.ok) throw new Error('Unable to load financial accounts');
+  const [response, optionsResponse] = await Promise.all([
+    backendFetch('/accounts'),
+    backendFetch('/accounts/options'),
+  ]);
+  if (!response.ok || !optionsResponse.ok)
+    throw new Error('Unable to load financial accounts');
+  const options = accountOptionsSchema.parse(await optionsResponse.json());
   return (
     <AccountsWorkspace
-      currencies={preferenceOptions().currencies}
+      currencies={options.currencies}
+      currencyDigits={options.currencyDigits}
       initial={accountsSchema.parse(await response.json())}
       currency={user.baseCurrency!}
       locale={user.locale!}
-      today={new Date().toISOString().slice(0, 10)}
+      today={options.today}
     />
   );
 }

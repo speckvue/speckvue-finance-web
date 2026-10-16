@@ -6,8 +6,11 @@ import * as Dialog from '@radix-ui/react-dialog';
 import {
   RiBankLine,
   RiCloseLine,
+  RiContactsBookLine,
+  RiExchangeDollarLine,
   RiHome5Line,
   RiMenuLine,
+  RiPriceTag3Line,
   RiSettings3Line,
   RiUserLine,
 } from '@remixicon/react';
@@ -21,6 +24,9 @@ import ScrollArea from './scroll-area';
 const destinations = [
   { href: '/workspace', label: 'Overview', icon: RiHome5Line },
   { href: '/accounts', label: 'Accounts', icon: RiBankLine },
+  { href: '/transactions', label: 'Transactions', icon: RiExchangeDollarLine },
+  { href: '/categories', label: 'Categories', icon: RiPriceTag3Line },
+  { href: '/payees', label: 'Payees', icon: RiContactsBookLine },
   { href: '/settings', label: 'Settings', icon: RiSettings3Line },
 ];
 
@@ -51,7 +57,9 @@ const AppShell = ({
         <Link
           key={href}
           href={href}
-          aria-current={path === href ? 'page' : undefined}
+          aria-current={
+            path === href || path.startsWith(href + '/') ? 'page' : undefined
+          }
           onClick={() => setMenuOpen(false)}
         >
           <Icon size={21} aria-hidden="true" />

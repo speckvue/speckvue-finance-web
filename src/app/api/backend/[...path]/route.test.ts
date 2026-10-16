@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { NextRequest } from 'next/server';
 import { beforeEach, expect, test, vi } from 'vitest';
-import { GET, POST } from './route';
+import { DELETE, GET, POST } from './route';
 
 const backend = vi.hoisted(() => vi.fn());
 vi.mock('@/lib/auth/backend', () => ({ default: backend }));
@@ -48,6 +48,74 @@ test('preserves financial account filters and pagination when forwarding', async
     ).status,
   ).toBe(200);
   expect(backend).toHaveBeenCalledWith('/accounts' + search, expect.anything());
+});
+
+test('forwards category actions but exposes no category delete or arbitrary actions', async () => {
+  backend.mockResolvedValue(new Response('{}'));
+  const id = 'd07a6c6d-5ea4-4a1b-9b6b-b9716a4f22b6';
+  const response = await POST(
+    new NextRequest(origin + '/api/backend/categories/' + id + '/move', {
+      method: 'POST',
+      headers: {
+        Origin: new URL(origin).origin,
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': 'token',
+      },
+      body: JSON.stringify({ direction: 'up' }),
+    }),
+    context('categories/' + id + '/move'),
+  );
+  expect(response.status).toBe(200);
+  expect(backend).toHaveBeenCalledWith(
+    '/categories/' + id + '/move',
+    expect.objectContaining({ method: 'POST' }),
+  );
+  expect(
+    (
+      await GET(
+        new NextRequest(origin + '/api/backend/categories/' + id + '/delete'),
+        context('categories/' + id + '/delete'),
+      )
+    ).status,
+  ).toBe(404);
+});
+
+test('forwards payee search and explicitly allows the merge action', async () => {
+  backend.mockImplementation(() => Promise.resolve(new Response('{}')));
+  const id = 'd07a6c6d-5ea4-4a1b-9b6b-b9716a4f22b6';
+  const query = '?status=merged&q=A%26B&kind=person';
+  expect(
+    (
+      await GET(
+        new NextRequest(origin + '/api/backend/payees' + query),
+        context('payees'),
+      )
+    ).status,
+  ).toBe(200);
+  expect(backend).toHaveBeenCalledWith('/payees' + query, expect.anything());
+  expect(
+    (
+      await POST(
+        new NextRequest(origin + '/api/backend/payees/' + id + '/merge', {
+          method: 'POST',
+          headers: {
+            Origin: new URL(origin).origin,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ targetId: id }),
+        }),
+        context('payees/' + id + '/merge'),
+      )
+    ).status,
+  ).toBe(200);
+  expect(
+    (
+      await GET(
+        new NextRequest(origin + '/api/backend/payees/' + id + '/delete'),
+        context('payees/' + id + '/delete'),
+      )
+    ).status,
+  ).toBe(404);
 });
 
 test('forwards origin and CSRF and makes HttpOnly cookies available to server pages', async () => {
@@ -99,4 +167,57 @@ test('bounds payloads and fails safely during API outages', async () => {
   );
   expect(failed.status).toBe(503);
   expect(await failed.text()).not.toContain('private connection');
+});
+
+test('allows owned ledger history and revision-checked deletion through the protected gateway', async () => {
+  backend.mockImplementation(() => Promise.resolve(new Response('{}')));
+  const id = 'd07a6c6d-5ea4-4a1b-9b6b-b9716a4f22b6';
+  const history = 'transactions/' + id + '/history';
+  expect(
+    (
+      await GET(
+        new NextRequest(origin + '/api/backend/' + history + '?before=5'),
+        context(history),
+      )
+    ).status,
+  ).toBe(200);
+  expect(backend).toHaveBeenCalledWith(
+    '/' + history + '?before=5',
+    expect.anything(),
+  );
+  const path = 'transactions/' + id;
+  expect(
+    (
+      await DELETE(
+        new NextRequest(origin + '/api/backend/' + path, {
+          method: 'DELETE',
+          headers: {
+            Origin: new URL(origin).origin,
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': 'token',
+          },
+          body: JSON.stringify({ revision: 2 }),
+        }),
+        context(path),
+      )
+    ).status,
+  ).toBe(200);
+  expect(
+    (backend.mock.calls[1]![1].headers as Headers).get('x-csrf-token'),
+  ).toBe('token');
+  expect(
+    (
+      await POST(
+        new NextRequest(origin + '/api/backend/' + history, {
+          method: 'POST',
+          headers: {
+            Origin: new URL(origin).origin,
+            'Content-Type': 'application/json',
+          },
+          body: '{}',
+        }),
+        context(history),
+      )
+    ).status,
+  ).toBe(405);
 });

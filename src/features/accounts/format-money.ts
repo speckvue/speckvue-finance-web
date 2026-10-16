@@ -1,11 +1,22 @@
 /** Formats a stored decimal exactly, including values beyond safe fractional Number precision. */
-const formatMoney = (amount: string, currency: string, locale: string) => {
+const formatMoney = (
+  amount: string,
+  currency: string,
+  locale: string,
+  currencyDigits?: number,
+) => {
   const negative = amount.startsWith('-');
   const [whole, fraction = ''] = amount.replace(/^-/, '').split('.');
   const formatter = new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
     currencyDisplay: 'code',
+    ...(currencyDigits === undefined
+      ? {}
+      : {
+          minimumFractionDigits: currencyDigits,
+          maximumFractionDigits: currencyDigits,
+        }),
   });
   const digits = formatter.resolvedOptions().maximumFractionDigits!;
   const integer = BigInt(whole!);

@@ -76,6 +76,8 @@ test('financial accounts persist, archive, restore, and use responsive navigatio
   await expect(page).toHaveURL(/\/accounts$/);
   await page.getByRole('button', { name: 'Add account', exact: true }).click();
   await page.getByLabel('Account name').fill('Everyday bank');
+  await page.getByLabel('Institution (optional)').fill('Example institution');
+  await page.getByLabel('Notes (optional)').fill('Primary account');
   await page
     .getByLabel('Opening balance', { exact: true })
     .fill('999999999999999.99');
@@ -85,6 +87,21 @@ test('financial accounts persist, archive, restore, and use responsive navigatio
   ).toBeVisible();
   await expect(page.getByText(/999,999,999,999,999\.99/)).toBeVisible();
   await page.reload();
+  await page
+    .getByRole('link', { name: 'Details Everyday bank', exact: true })
+    .click();
+  await expect(
+    page.getByText('Example institution', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Primary account', { exact: true }),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Edit account', exact: true }).click();
+  await expect(page.getByLabel('Currency', { exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await page
+    .getByRole('link', { name: 'Back to accounts', exact: true })
+    .click();
   await page.getByRole('button', { name: /Edit.*Everyday bank/ }).click();
   await page.getByLabel('Account name').fill('Everyday savings');
   await page.getByRole('button', { name: 'Save changes', exact: true }).click();

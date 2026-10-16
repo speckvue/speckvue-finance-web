@@ -15,6 +15,8 @@ const account: Account = {
   name: 'Everyday bank',
   type: 'bank',
   currency: 'USD',
+  institution: null,
+  notes: null,
   openingBalance: '100.0000',
   openingBalanceDate: '2026-01-01',
   archivedAt: null,
@@ -39,12 +41,18 @@ test('saving locks all financial account controls, shows a spinner, and recovers
   );
   render(<AccountsWorkspace {...props} />);
   await userEvent.click(screen.getByRole('button', { name: 'Add account' }));
+  expect(screen.getByRole('dialog', { name: 'Add an account' })).toBeVisible();
   await userEvent.type(screen.getByLabelText('Account name'), account.name);
   await userEvent.click(screen.getByRole('button', { name: 'Add account' }));
   expect(await screen.findByRole('button', { name: 'Saving…' })).toBeDisabled();
   expect(screen.getByLabelText('Account name')).toBeDisabled();
   expect(screen.getByLabelText('Currency')).toBeDisabled();
   expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+  expect(
+    screen.getByRole('button', { name: 'Close account form' }),
+  ).toBeDisabled();
+  await userEvent.keyboard('{Escape}');
+  expect(screen.getByRole('dialog')).toBeVisible();
   await act(async () => rejectRequest(new Error('offline')));
   expect(await screen.findByRole('alert')).toHaveTextContent(
     'Unable to complete this request.',
@@ -57,6 +65,7 @@ test('saving locks all financial account controls, shows a spinner, and recovers
     await screen.findByRole('heading', { name: account.name }),
   ).toBeVisible();
   expect(screen.getByRole('status')).toHaveTextContent('Account added.');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
 
 test('archiving requires confirmation and archived accounts can be restored', async () => {
@@ -97,4 +106,32 @@ test('archiving requires confirmation and archived accounts can be restored', as
   expect(
     await screen.findByRole('heading', { name: 'No archived accounts' }),
   ).toBeVisible();
+});
+
+test('editing preserves optional details and locks the account currency', async () => {
+  render(
+    <AccountsWorkspace
+      {...props}
+      initial={{
+        items: [{ ...account, institution: 'Saved bank', notes: 'Saved note' }],
+        nextCursor: null,
+      }}
+    />,
+  );
+  await userEvent.click(
+    screen.getByRole('button', { name: /Edit.*Everyday bank/ }),
+  );
+  expect(screen.getByRole('dialog', { name: 'Edit account' })).toBeVisible();
+  expect(screen.getByLabelText('Currency')).toBeDisabled();
+  expect(screen.getByLabelText('Institution (optional)')).toHaveValue(
+    'Saved bank',
+  );
+  expect(screen.getByLabelText('Notes (optional)')).toHaveValue('Saved note');
+  await userEvent.keyboard('{Escape}');
+  await waitFor(() =>
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument(),
+  );
+  expect(
+    screen.getByRole('button', { name: /Edit.*Everyday bank/ }),
+  ).toHaveFocus();
 });

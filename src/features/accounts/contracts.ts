@@ -16,7 +16,10 @@ export const accountTypeSchema = z.enum([
   'loan',
   'other',
 ]);
-export const createAccountInputSchema = (currencies: readonly string[]) =>
+export const createAccountInputSchema = (
+  currencies: readonly string[],
+  options?: { today?: string; currencyDigits?: Record<string, number> },
+) =>
   z
     .object({
       name: z
@@ -30,6 +33,28 @@ export const createAccountInputSchema = (currencies: readonly string[]) =>
         ),
       type: accountTypeSchema,
       currency: z.string().regex(/^[A-Z]{3}$/),
+      institution: z
+        .string()
+        .trim()
+        .max(120)
+        .refine(
+          (value) => !/\p{Cc}/u.test(value),
+          'Use plain text without control characters.',
+        )
+        .optional(),
+      notes: z
+        .string()
+        .trim()
+        .max(1000)
+        .refine(
+          (value) =>
+            !Array.from(value).some(
+              (character) =>
+                /\p{Cc}/u.test(character) && !'\n\r\t'.includes(character),
+            ),
+          'Use plain text without control characters.',
+        )
+        .optional(),
       openingBalance: z
         .string()
         .regex(
@@ -47,10 +72,12 @@ export const createAccountInputSchema = (currencies: readonly string[]) =>
         });
         return;
       }
-      const digits = new Intl.NumberFormat('en', {
-        style: 'currency',
-        currency: value.currency,
-      }).resolvedOptions().maximumFractionDigits!;
+      const digits =
+        options?.currencyDigits?.[value.currency] ??
+        new Intl.NumberFormat('en', {
+          style: 'currency',
+          currency: value.currency,
+        }).resolvedOptions().maximumFractionDigits!;
       if (
         (value.openingBalance.split('.')[1] ?? '').replace(/0+$/, '').length >
         digits
@@ -60,7 +87,10 @@ export const createAccountInputSchema = (currencies: readonly string[]) =>
           path: ['openingBalance'],
           message: `Use up to ${digits} decimal places for ${value.currency}.`,
         });
-      if (value.openingBalanceDate > new Date().toISOString().slice(0, 10))
+      if (
+        value.openingBalanceDate >
+        (options?.today ?? new Date().toISOString().slice(0, 10))
+      )
         ctx.addIssue({
           code: 'custom',
           path: ['openingBalanceDate'],
@@ -75,8 +105,15 @@ export const accountSchema = z.object({
   name: z.string(),
   type: accountTypeSchema,
   currency: z.string().regex(/^[A-Z]{3}$/),
+  institution: z.string().nullable().default(null),
+  notes: z.string().nullable().default(null),
   openingBalance: z.string().regex(/^-?\d+\.\d{4}$/),
   openingBalanceDate: z.iso.date(),
+  currentBalance: z
+    .string()
+    .regex(/^-?\d+\.\d{4}$/)
+    .optional(),
+  hasTransactions: z.boolean().optional(),
   archivedAt: z.iso.datetime().nullable(),
   createdAt: z.iso.datetime(),
   updatedAt: z.iso.datetime(),
@@ -85,6 +122,12 @@ export const accountsSchema = z.object({
   items: z.array(accountSchema),
   nextCursor: z.uuid().nullable(),
 });
+export const accountOptionsSchema = z.object({
+  currencies: z.array(z.string().regex(/^[A-Z]{3}$/)),
+  currencyDigits: z.record(z.string(), z.number().int().min(0).max(4)),
+  today: z.iso.date(),
+});
+export type AccountOptions = z.infer<typeof accountOptionsSchema>;
 export type Account = z.infer<typeof accountSchema>;
 export type AccountInput = z.infer<typeof accountInputSchema>;
 export type AccountsPage = z.infer<typeof accountsSchema>;

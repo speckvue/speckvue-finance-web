@@ -16,6 +16,10 @@ const routes: Record<string, readonly string[]> = {
   'users/me/onboarding': ['POST'],
   'users/me/preferences': ['PATCH'],
   accounts: ['GET', 'POST'],
+  'accounts/options': ['GET'],
+  categories: ['GET', 'POST'],
+  payees: ['GET', 'POST'],
+  transactions: ['GET', 'POST'],
 };
 
 const handler = async (
@@ -27,11 +31,21 @@ const handler = async (
     routes[path] ??
     (/^auth\/sessions\/[0-9a-f-]{36}$/i.test(path)
       ? ['DELETE']
-      : /^accounts\/[0-9a-f-]{36}$/i.test(path)
-        ? ['GET', 'PATCH']
-        : /^accounts\/[0-9a-f-]{36}\/(archive|restore)$/i.test(path)
-          ? ['POST']
-          : undefined);
+      : /^transactions\/[0-9a-f-]{36}\/history$/i.test(path)
+        ? ['GET']
+        : /^transactions\/[0-9a-f-]{36}$/i.test(path)
+          ? ['GET', 'PATCH', 'DELETE']
+          : /^(accounts|categories|payees)\/[0-9a-f-]{36}$/i.test(path)
+            ? ['GET', 'PATCH']
+            : /^accounts\/[0-9a-f-]{36}\/(archive|restore)$/i.test(path)
+              ? ['POST']
+              : /^categories\/[0-9a-f-]{36}\/(archive|restore|move)$/i.test(
+                    path,
+                  )
+                ? ['POST']
+                : /^payees\/[0-9a-f-]{36}\/(archive|restore|merge)$/i.test(path)
+                  ? ['POST']
+                  : undefined);
   const reply = (status: number) =>
     Response.json(
       { message: 'Request unavailable' },

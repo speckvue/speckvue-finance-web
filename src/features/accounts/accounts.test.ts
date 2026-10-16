@@ -26,6 +26,12 @@ test('money formatting preserves large decimals and negative fractions exactly',
     'CLF1.2345',
   );
 });
+
+test('API precision overrides different browser currency formatting data', () => {
+  expect(formatMoney('12.3400', 'JPY', 'en-US', 2).replace(/\s/g, '')).toBe(
+    'JPY12.34',
+  );
+});
 test.each([
   { openingBalance: '1e4' },
   { openingBalance: '1,000' },
@@ -63,4 +69,39 @@ test('uses the server currency snapshot rather than a different browser currency
   const schema = createAccountInputSchema(['USD', 'SLE']);
   expect(schema.safeParse({ ...input, currency: 'SLE' }).success).toBe(true);
   expect(schema.safeParse({ ...input, currency: 'EUR' }).success).toBe(false);
+});
+
+test('uses the API local date and precision rather than the browser clock or ICU data', () => {
+  const schema = createAccountInputSchema(['USD'], {
+    today: '2026-01-02',
+    currencyDigits: { USD: 0 },
+  });
+  expect(
+    schema.safeParse({ ...input, openingBalanceDate: '2026-01-02' }).success,
+  ).toBe(true);
+  expect(
+    schema.safeParse({ ...input, openingBalanceDate: '2026-01-03' }).success,
+  ).toBe(false);
+  expect(schema.safeParse({ ...input, openingBalance: '0.01' }).success).toBe(
+    false,
+  );
+});
+
+test('validates optional details while preserving readable multiline notes', () => {
+  expect(
+    accountInputSchema.parse({
+      ...input,
+      institution: ' Bank ',
+      notes: ' One\nTwo ',
+    }),
+  ).toMatchObject({ institution: 'Bank', notes: 'One\nTwo' });
+  for (const invalid of [
+    { institution: 'x'.repeat(121) },
+    { institution: 'Bad\nBank' },
+    { notes: 'x'.repeat(1001) },
+    { notes: '\u0000' },
+  ])
+    expect(accountInputSchema.safeParse({ ...input, ...invalid }).success).toBe(
+      false,
+    );
 });

@@ -1,4 +1,8 @@
-import { accountTypes, accountsSchema } from '@/features/accounts/contracts';
+import {
+  accountOptionsSchema,
+  accountTypes,
+  accountsSchema,
+} from '@/features/accounts/contracts';
 import formatMoney from '@/features/accounts/format-money';
 import backendFetch from '@/lib/auth/backend';
 import requireUser from '@/lib/auth/session';
@@ -11,8 +15,13 @@ import Link from 'next/link';
 
 export default async function WorkspacePage() {
   const user = await requireUser();
-  const response = await backendFetch('/accounts');
-  if (!response.ok) throw new Error('Unable to load your financial workspace');
+  const [response, optionsResponse] = await Promise.all([
+    backendFetch('/accounts'),
+    backendFetch('/accounts/options'),
+  ]);
+  if (!response.ok || !optionsResponse.ok)
+    throw new Error('Unable to load your financial workspace');
+  const options = accountOptionsSchema.parse(await optionsResponse.json());
   const accounts = accountsSchema.parse(await response.json());
   return (
     <div>
@@ -59,16 +68,24 @@ export default async function WorkspacePage() {
                     <RiBankLine size={20} aria-hidden="true" />
                   </span>
                   <div>
-                    <p>{account.name}</p>
+                    <p>
+                      <Link
+                        href={'/accounts/' + account.id}
+                        className="underline-offset-4 hover:underline"
+                      >
+                        {account.name}
+                      </Link>
+                    </p>
                     <small>{accountTypes[account.type]}</small>
                   </div>
                   <span>
                     {formatMoney(
-                      account.openingBalance,
+                      account.currentBalance ?? account.openingBalance,
                       account.currency,
                       user.locale!,
+                      options.currencyDigits[account.currency],
                     )}
-                    <small>Opening balance</small>
+                    <small>Current balance</small>
                   </span>
                 </li>
               ))}

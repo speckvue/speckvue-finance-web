@@ -13,17 +13,21 @@ import {
 const AccountForm = ({
   initial,
   editing,
+  openingLocked = false,
   busy,
   today,
   currencies,
+  currencyDigits,
   onSave,
   onCancel,
 }: {
   initial: AccountInput;
   editing: boolean;
+  openingLocked?: boolean;
   busy: boolean;
   today: string;
   currencies: string[];
+  currencyDigits?: Record<string, number>;
   onSave: (value: AccountInput) => Promise<void>;
   onCancel: () => void;
 }) => {
@@ -31,13 +35,15 @@ const AccountForm = ({
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   return (
     <form
-      className="rounded-2xl border border-stroke-soft-200 bg-bg-white-0 p-6"
       noValidate
       aria-busy={busy}
       onSubmit={(event) => {
         event.preventDefault();
         if (busy) return;
-        const parsed = createAccountInputSchema(currencies).safeParse(value);
+        const parsed = createAccountInputSchema(currencies, {
+          today,
+          currencyDigits,
+        }).safeParse(value);
         if (!parsed.success) {
           const messages: Record<string, string[]> = {};
           for (const issue of parsed.error.issues)
@@ -50,7 +56,7 @@ const AccountForm = ({
       }}
     >
       <fieldset disabled={busy} className="min-w-0 space-y-6">
-        <legend className="mb-6 text-xl font-medium">
+        <legend className="sr-only">
           {editing ? 'Edit account' : 'Add an account'}
         </legend>
         <div className="grid gap-5 sm:grid-cols-2">
@@ -93,6 +99,8 @@ const AccountForm = ({
             </label>
             <select
               id="account-currency"
+              disabled={editing}
+              aria-describedby={editing ? 'account-currency-hint' : undefined}
               className="account-select"
               value={value.currency}
               onChange={(event) =>
@@ -105,9 +113,19 @@ const AccountForm = ({
                 </option>
               ))}
             </select>
+            {editing && (
+              <p
+                id="account-currency-hint"
+                className="mt-2 text-xs text-text-sub-600"
+              >
+                Currency is fixed after creation. Add a separate account for
+                another currency.
+              </p>
+            )}
           </div>
           <TextField
             id="account-balance"
+            disabled={openingLocked}
             label="Opening balance"
             inputMode="decimal"
             value={value.openingBalance}
@@ -119,6 +137,7 @@ const AccountForm = ({
           />
           <TextField
             id="account-date"
+            disabled={openingLocked}
             label="Opening balance date"
             type="date"
             max={today}
@@ -127,8 +146,46 @@ const AccountForm = ({
               setValue({ ...value, openingBalanceDate: event.target.value })
             }
             errors={errors.openingBalanceDate}
-            hint="The date this starting balance applies to."
+            hint="The date this starting balance applies to. Today follows your saved timezone."
           />
+          <TextField
+            id="account-institution"
+            label="Institution (optional)"
+            autoComplete="off"
+            maxLength={120}
+            value={value.institution ?? ''}
+            onChange={(event) =>
+              setValue({ ...value, institution: event.target.value })
+            }
+            errors={errors.institution}
+            hint="Bank or provider name. Do not enter account numbers or passwords."
+          />
+        </div>
+        <div>
+          <label htmlFor="account-notes" className="account-field-label">
+            Notes (optional)
+          </label>
+          <textarea
+            id="account-notes"
+            className="account-select min-h-24 resize-y"
+            maxLength={1000}
+            value={value.notes ?? ''}
+            onChange={(event) =>
+              setValue({ ...value, notes: event.target.value })
+            }
+            aria-invalid={!!errors.notes?.length}
+            aria-describedby={
+              errors.notes?.length ? 'account-notes-error' : undefined
+            }
+          />
+          {errors.notes?.length && (
+            <p
+              id="account-notes-error"
+              className="mt-2 text-xs text-error-base"
+            >
+              {errors.notes.join(' ')}
+            </p>
+          )}
         </div>
         <p className="text-xs leading-relaxed text-text-sub-600">
           Accounts are tracked manually. Adding an account does not connect to
