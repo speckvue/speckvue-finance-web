@@ -221,3 +221,53 @@ test('allows owned ledger history and revision-checked deletion through the prot
     ).status,
   ).toBe(405);
 });
+
+test('allowlists aggregate transfers and history while refusing individual-leg mutations', async () => {
+  backend.mockImplementation(() => Promise.resolve(new Response('{}')));
+  const id = 'd07a6c6d-5ea4-4a1b-9b6b-b9716a4f22b6';
+  const history = 'transfers/' + id + '/history';
+  expect(
+    (
+      await GET(
+        new NextRequest(origin + '/api/backend/' + history + '?before=7'),
+        context(history),
+      )
+    ).status,
+  ).toBe(200);
+  expect(backend).toHaveBeenCalledWith(
+    '/' + history + '?before=7',
+    expect.anything(),
+  );
+  const path = 'transfers/' + id;
+  expect(
+    (
+      await DELETE(
+        new NextRequest(origin + '/api/backend/' + path, {
+          method: 'DELETE',
+          headers: {
+            Origin: new URL(origin).origin,
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': 'token',
+          },
+          body: JSON.stringify({ revision: 1 }),
+        }),
+        context(path),
+      )
+    ).status,
+  ).toBe(200);
+  expect(
+    (
+      await POST(
+        new NextRequest(origin + '/api/backend/' + path + '/outgoing', {
+          method: 'POST',
+          headers: {
+            Origin: new URL(origin).origin,
+            'Content-Type': 'application/json',
+          },
+          body: '{}',
+        }),
+        context(path + '/outgoing'),
+      )
+    ).status,
+  ).toBe(404);
+});

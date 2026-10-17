@@ -247,6 +247,12 @@ const TransactionsWorkspace = ({
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-medium">Transactions</h1>
+          <Link
+            href="/transfers"
+            className="mt-2 inline-block text-sm underline underline-offset-4"
+          >
+            Record a transfer between accounts.
+          </Link>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-sub-600">
             Record income, expenses and refunds. Every saved entry updates its
             account balance.

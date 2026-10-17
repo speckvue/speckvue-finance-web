@@ -20,6 +20,7 @@ const routes: Record<string, readonly string[]> = {
   categories: ['GET', 'POST'],
   payees: ['GET', 'POST'],
   transactions: ['GET', 'POST'],
+  transfers: ['GET', 'POST'],
 };
 
 const handler = async (
@@ -31,9 +32,9 @@ const handler = async (
     routes[path] ??
     (/^auth\/sessions\/[0-9a-f-]{36}$/i.test(path)
       ? ['DELETE']
-      : /^transactions\/[0-9a-f-]{36}\/history$/i.test(path)
+      : /^(transactions|transfers)\/[0-9a-f-]{36}\/history$/i.test(path)
         ? ['GET']
-        : /^transactions\/[0-9a-f-]{36}$/i.test(path)
+        : /^(transactions|transfers)\/[0-9a-f-]{36}$/i.test(path)
           ? ['GET', 'PATCH', 'DELETE']
           : /^(accounts|categories|payees)\/[0-9a-f-]{36}$/i.test(path)
             ? ['GET', 'PATCH']

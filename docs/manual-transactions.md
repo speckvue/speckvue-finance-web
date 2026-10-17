@@ -10,6 +10,6 @@ Deletion requires confirmation, reverses the balance effect and retains the entr
 
 Accounts, account details and Overview now show transaction-derived current balances. Account opening balance/date become read-only after any transaction history, even when entries are deleted or moved to another account. Opening amounts remain visible in account details and never count as income. No currency conversion or mixed-currency total is implied.
 
-The existing neutral/lime visual system, Google Sans/Poppins fonts, next-themes and stationary responsive shell are preserved. Only the inner main pane scrolls. No SMTP, demo financial records, transfer or reconciliation workflows are introduced.
+The existing neutral/lime visual system, Google Sans/Poppins fonts, next-themes and stationary responsive shell are preserved. Only the inner main pane scrolls. No SMTP or demo financial records are introduced. Linked [transfers](transfers.md) now have a separate workflow; reconciliation is a later step.
 
 The API owns financial rules and performs Decimal arithmetic inside owner-locked database transactions. Frontend validation uses BigInt scaled amounts and the API currency/date snapshot. See the sibling API's `docs/manual-transactions.md` for exact contracts, ownership and idempotency rules.

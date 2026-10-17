@@ -4,6 +4,7 @@ import AccountTheme from '@/features/preferences/components/account-theme';
 import type { User } from '@/lib/auth/contracts';
 import * as Dialog from '@radix-ui/react-dialog';
 import {
+  RiArrowLeftRightLine,
   RiBankLine,
   RiCloseLine,
   RiContactsBookLine,
@@ -25,6 +26,7 @@ const destinations = [
   { href: '/workspace', label: 'Overview', icon: RiHome5Line },
   { href: '/accounts', label: 'Accounts', icon: RiBankLine },
   { href: '/transactions', label: 'Transactions', icon: RiExchangeDollarLine },
+  { href: '/transfers', label: 'Transfers', icon: RiArrowLeftRightLine },
   { href: '/categories', label: 'Categories', icon: RiPriceTag3Line },
   { href: '/payees', label: 'Payees', icon: RiContactsBookLine },
   { href: '/settings', label: 'Settings', icon: RiSettings3Line },

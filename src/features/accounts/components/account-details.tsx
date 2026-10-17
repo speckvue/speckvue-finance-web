@@ -130,12 +130,20 @@ const AccountDetails = ({
           </Button.Root>
         </div>
       </div>
-      <Link
-        href={'/transactions?accountId=' + account.id}
-        className="inline-block text-sm underline underline-offset-4"
-      >
-        View account transactions
-      </Link>
+      <div className="flex flex-wrap gap-4">
+        <Link
+          href={'/transactions?accountId=' + account.id}
+          className="text-sm underline underline-offset-4"
+        >
+          View account transactions
+        </Link>
+        <Link
+          href={'/transfers?accountId=' + account.id}
+          className="text-sm underline underline-offset-4"
+        >
+          View account transfers
+        </Link>
+      </div>
       {account.hasTransactions && (
         <p className="text-sm text-text-sub-600">
           Opening balance and date are locked because this account has
